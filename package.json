@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "api-server": "node server.js",
-    "postinstall": "cd client && npm install"
+    "postinstall": "webpack -p"
   },
   "engines": {
     "node": ">=7.0.0"
@@ -27,14 +27,14 @@
     "nodemon": "^1.11.0",
     "sass-loader": "^6.0.3",
     "serve": "^3.1.0",
-    "style-loader": "^0.13.2",
-    "webpack": "2.1.0-beta.21"
+    "style-loader": "^0.13.2"
   },
   "repository": "https://github.com/amituuush/ChatApp.git",
   "dependencies": {
     "express": "^4.15.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "superagent": "^3.5.0"
+    "superagent": "^3.5.0",
+    "webpack": "2.1.0-beta.21"
   }
 }
