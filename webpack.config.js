@@ -4,6 +4,9 @@ module.exports = {
     path: './public',
     filename: 'bundle.js'
   },
+  node: {
+    fs: 'empty'
+  },
   module: {
       loaders: [
           {
@@ -15,12 +18,16 @@ module.exports = {
             }
           },
           {
-            test: /\.less$/,
-            loader: "style!css!less"
+            test: /\.scss$/,
+            loaders: ["style", "css", "sass"]
           },
           { test: /\.css$/,
             loader: "style!css"
           },
+          {
+            test: /\.json$/,
+            loader: "json-loader"
+          }
         ]
       },
     resolve: {
