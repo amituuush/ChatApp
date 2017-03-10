@@ -21,7 +21,6 @@
     "babel-preset-stage-0": "^6.22.0",
     "body-parser": "~1.0.1",
     "css-loader": "^0.27.0",
-    "express": "^4.15.2",
     "json-loader": "^0.5.4",
     "node-sass": "^4.5.0",
     "nodemon": "^1.11.0",
@@ -32,6 +31,7 @@
   },
   "repository": "https://github.com/amituuush/ChatApp.git",
   "dependencies": {
+    "express": "^4.15.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "superagent": "^3.5.0"
