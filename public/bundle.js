@@ -11985,7 +11985,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, ".left-panel-container {\n  display: inline-block;\n  width: 12em;\n  background: #FF1940;\n  height: 100%;\n  padding: 2em; }\n", ""]);
+exports.push([module.i, ".left-panel-container {\n  float: left;\n  width: 12em;\n  background: #FF1940;\n  height: 100%;\n  padding: 2em; }\n", ""]);
 
 // exports
 
@@ -11999,7 +11999,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, ".right-panel-container {\n  display: inline-block;\n  width: 78%;\n  height: 100%;\n  vertical-align: top; }\n", ""]);
+exports.push([module.i, ".right-panel-container {\n  height: 100%;\n  vertical-align: top; }\n", ""]);
 
 // exports
 
@@ -25039,8 +25039,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ChatHeader = function ChatHeader(props) {
   return _react2.default.createElement(
     'div',
-    null,
-    'I\'m a header'
+    { className: 'chat-header-container' },
+    _react2.default.createElement(
+      'div',
+      null,
+      'Engineering'
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      'Amit, Jack, Sam'
+    )
   );
 };
 
@@ -25102,7 +25111,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".chat-header-container {\n  width: 100%;\n  height: 7em;\n  box-shadow: 0px 1px 6px #C7C9CA; }\n", ""]);
 
 // exports
 

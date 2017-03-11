@@ -4,8 +4,9 @@ import './chat-header.scss';
 
 const ChatHeader = props => {
   return (
-    <div>
-      I'm a header
+    <div className="chat-header-container">
+      <div>Engineering</div>
+      <div>Amit, Jack, Sam</div>
     </div>
   );
 }
