@@ -11999,7 +11999,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, ".right-panel-container {\n  height: 100%;\n  vertical-align: top; }\n", ""]);
+exports.push([module.i, ".right-panel-container {\n  height: 100%;\n  vertical-align: top;\n  width: 100%;\n  display: flex;\n  flex-flow: column; }\n", ""]);
 
 // exports
 
@@ -24723,7 +24723,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, ".app-container {\n  height: 100%;\n  width: 100%; }\n", ""]);
+exports.push([module.i, ".app-container {\n  height: 100%;\n  width: 100%;\n  display: flex;\n  overflow: hidden; }\n", ""]);
 
 // exports
 
@@ -25001,6 +25001,10 @@ var _react = __webpack_require__(25);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Message = __webpack_require__(219);
+
+var _Message2 = _interopRequireDefault(_Message);
+
 __webpack_require__(216);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -25008,8 +25012,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ChatBox = function ChatBox(props) {
   return _react2.default.createElement(
     'div',
-    null,
-    'I\'m a ChatBox'
+    { className: 'chat-box-container' },
+    _react2.default.createElement(_Message2.default, null),
+    _react2.default.createElement(_Message2.default, null),
+    _react2.default.createElement(_Message2.default, null),
+    _react2.default.createElement(_Message2.default, null),
+    _react2.default.createElement(_Message2.default, null)
   );
 };
 
@@ -25079,8 +25087,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ChatInput = function ChatInput(props) {
   return _react2.default.createElement(
     'div',
-    null,
-    'I\'m a Chat Input'
+    { className: 'chat-input-container' },
+    _react2.default.createElement('input', { type: 'text' }),
+    _react2.default.createElement(
+      'button',
+      null,
+      'Send'
+    )
   );
 };
 
@@ -25097,7 +25110,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".chat-box-container {\n  background: #EFF1F2;\n  height: 100%;\n  position: relative; }\n", ""]);
 
 // exports
 
@@ -25111,7 +25124,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, ".chat-header-container {\n  width: 100%;\n  height: 7em;\n  box-shadow: 0px 1px 6px #C7C9CA; }\n", ""]);
+exports.push([module.i, ".chat-header-container {\n  width: 100%;\n  height: 7em;\n  box-shadow: 0px 1px 6px #C7C9CA;\n  background: #fff;\n  position: fixed;\n  top: 0;\n  z-index: 9999; }\n", ""]);
 
 // exports
 
@@ -25125,7 +25138,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".chat-input-container {\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  height: 4em;\n  background: #fff;\n  box-shadow: 0px 0px 6px #C7C9CA; }\n", ""]);
 
 // exports
 
@@ -25200,6 +25213,77 @@ if(false) {
 	if(!content.locals) {
 		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./chat-input.scss", function() {
 			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./chat-input.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ },
+/* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(25);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(221);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Message = function Message(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'message-container' },
+    'I\'m a message'
+  );
+};
+
+Message.propTypes = {};
+
+exports.default = Message;
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(54)();
+// imports
+
+
+// module
+exports.push([module.i, ".message-container {\n  position: absolute;\n  bottom: 0; }\n", ""]);
+
+// exports
+
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(220);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(82)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./message.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./message.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});

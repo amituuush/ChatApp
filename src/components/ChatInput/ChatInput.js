@@ -4,8 +4,9 @@ import './chat-input.scss';
 
 const ChatInput = props => {
   return (
-    <div>
-      I'm a Chat Input
+    <div className="chat-input-container">
+      <input type="text"/>
+      <button>Send</button>
     </div>
   );
 }

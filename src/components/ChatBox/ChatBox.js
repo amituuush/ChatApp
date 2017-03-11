@@ -1,11 +1,16 @@
 import React, { PropTypes } from 'react';
+import Message from '../Message/Message';
 
 import './chat-box.scss';
 
 const ChatBox = props => {
   return (
-    <div>
-      I'm a ChatBox
+    <div className="chat-box-container">
+      <Message />
+      <Message />
+      <Message />
+      <Message />
+      <Message />
     </div>
   );
 }

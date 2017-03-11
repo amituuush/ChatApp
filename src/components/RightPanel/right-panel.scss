@@ -1,6 +1,7 @@
 .right-panel-container {
   height: 100%;
   vertical-align: top;
-
-
+  width: 100%;
+  display: flex;
+  flex-flow: column;
 }
