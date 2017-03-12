@@ -5,13 +5,13 @@ import './chat-room.scss';
 const ChatRoom = props => {
   return (
     <div className="chat-room-container">
-      Engineering
+      {props.name}
     </div>
   );
 }
 
 ChatRoom.propTypes = {
-  
+  name: React.PropTypes.string
 };
 
 export default ChatRoom;

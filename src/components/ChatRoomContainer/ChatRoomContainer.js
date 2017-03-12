@@ -6,17 +6,22 @@ import './chat-room-container-container.scss';
 const ChatRoomContainer = props => {
   return (
     <div className="chat-room-container">
-      <ChatRoom />
-      <ChatRoom />
-      <ChatRoom />
-      <ChatRoom />
-      <ChatRoom />
+      {
+        props.rooms.map(function(room) {
+          return (
+            <ChatRoom 
+              name={room.name}
+              key={room.id}
+             />
+          )
+        })
+      }
     </div>
   );
 }
 
 ChatRoomContainer.propTypes = {
-  
+  rooms: React.PropTypes.rooms
 };
 
 export default ChatRoomContainer;
