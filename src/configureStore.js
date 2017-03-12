@@ -2,7 +2,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import reduxThunk from 'redux-thunk';
 import reduxPromise from 'redux-promise';
 import createLogger from 'redux-logger';
-import { rootReducer } from './redux/reducers';
+import { rootReducer } from './reducers';
 
 const middlewares = [
   reduxThunk,
