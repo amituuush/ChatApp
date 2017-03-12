@@ -4,10 +4,13 @@
   "description": "The Frontend take home project for DoorDash",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "api-server": "node server.js",
-    "postinstall": "webpack -p"
+    "postinstall": "webpack -p",
+    "test": "mocha --compilers js:babel-register --require ./test/helpers.js --require ./test/dom.js --recursive",
+    "tdd": "npm test -- --watch",
+    "dev": "webpack-dev-server --port 3000 --devtool eval --progress --colors --hot --content-base dist",
+    "build": "webpack -p"
   },
   "engines": {
     "node": ">=7.0.0"
