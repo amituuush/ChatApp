@@ -21,7 +21,7 @@ const ChatRoomContainer = props => {
 }
 
 ChatRoomContainer.propTypes = {
-  rooms: React.PropTypes.rooms
+  rooms: React.PropTypes.array
 };
 
 export default ChatRoomContainer;

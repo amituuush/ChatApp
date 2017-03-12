@@ -31,9 +31,14 @@
   },
   "repository": "https://github.com/amituuush/ChatApp.git",
   "dependencies": {
+    "chai": "^3.5.0",
+    "enzyme": "^2.7.1",
     "express": "^4.15.2",
+    "mocha": "^3.2.0",
     "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
+    "sinon": "^1.17.7",
     "superagent": "^3.5.0",
     "webpack": "2.1.0-beta.21"
   }
