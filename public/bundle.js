@@ -27512,13 +27512,6 @@ var fetchRooms = exports.fetchRooms = function fetchRooms() {
       console.log(err);
     });
   };
-
-  // const request = axios.get(`${API_URL}/api/rooms`);
-  // console.log('request', request);
-  // return {
-  //   type: FETCH_ROOMS,
-  //   payload: request.data
-  // }
 };
 
 /***/ },
