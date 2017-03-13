@@ -32,6 +32,7 @@ export default class ChatInput extends Component {
 
   render() {
     return (
+      <div className="chat-input-wrap">
       <div className="chat-input-container">
         <form onSubmit={this.onFormSubmit}>
           <input 
@@ -41,6 +42,7 @@ export default class ChatInput extends Component {
             onChange={this.onInputChange} />
           <button type="submit">Send</button>
         </form>
+      </div>
       </div>
     );
   }

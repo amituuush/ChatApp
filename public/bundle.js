@@ -25299,19 +25299,23 @@ var ChatInput = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'chat-input-container' },
+        { className: 'chat-input-wrap' },
         _react2.default.createElement(
-          'form',
-          { onSubmit: this.onFormSubmit },
-          _react2.default.createElement('input', {
-            type: 'text',
-            placeholder: 'Type a message...',
-            value: this.state.message,
-            onChange: this.onInputChange }),
+          'div',
+          { className: 'chat-input-container' },
           _react2.default.createElement(
-            'button',
-            { type: 'submit' },
-            'Send'
+            'form',
+            { onSubmit: this.onFormSubmit },
+            _react2.default.createElement('input', {
+              type: 'text',
+              placeholder: 'Type a message...',
+              value: this.state.message,
+              onChange: this.onInputChange }),
+            _react2.default.createElement(
+              'button',
+              { type: 'submit' },
+              'Send'
+            )
           )
         )
       );
@@ -25367,7 +25371,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, ".chat-input-container {\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  height: 4em;\n  background: #fff;\n  box-shadow: 0px 0px 6px #C7C9CA; }\n", ""]);
+exports.push([module.i, ".chat-input-wrap {\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  height: 2.5em;\n  background: #fff;\n  box-shadow: 0px 0px 6px #C7C9CA;\n  padding: 1.5em; }\n  .chat-input-wrap .chat-input-container input {\n    width: 60%;\n    max-width: 34em;\n    border-radius: 3px;\n    border: none;\n    box-shadow: inset 0px 0px 2px #95979b;\n    padding: 0.7em;\n    margin-bottom: 1em;\n    margin-right: 1em;\n    font-weight: 100; }\n  .chat-input-wrap .chat-input-container button {\n    color: #4A90E2;\n    background: #fff;\n    border: none; }\n    .chat-input-wrap .chat-input-container button:hover {\n      cursor: pointer; }\n", ""]);
 
 // exports
 

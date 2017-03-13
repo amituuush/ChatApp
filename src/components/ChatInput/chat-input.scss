@@ -1,8 +1,34 @@
-.chat-input-container {
+.chat-input-wrap {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 4em;
+  height: 2.5em;
   background: #fff;
   box-shadow: 0px 0px 6px #C7C9CA;
+  padding: 1.5em;
+
+  .chat-input-container {
+    input {
+       width: 60%;
+       max-width: 34em;
+      border-radius: 3px;
+      border: none;
+      box-shadow: inset 0px 0px 2px #95979b;
+      padding: 0.7em;
+      margin-bottom: 1em;
+      margin-right: 1em;
+      font-weight: 100;
+    }
+
+    button {
+      color: #4A90E2;
+      background: #fff;
+      border: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }
+
