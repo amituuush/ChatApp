@@ -1,5 +1,16 @@
 .name-and-time-online-container {
+  padding: 2em;
   h2, p {
     color: #fff;
+  }
+
+  h2 {
+    margin: 0em;
+    font-size: 1.25em;
+  }
+
+  p {
+    font-size: 0.9em;
+    margin-top: 0.5em;
   }
 }

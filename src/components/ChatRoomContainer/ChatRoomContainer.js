@@ -5,7 +5,7 @@ import './chat-room-container-container.scss';
 
 const ChatRoomContainer = props => {
   return (
-    <div className="chat-room-container">
+    <div className="chat-room-container-container">
       {
         props.rooms.map(function(room) {
           return (

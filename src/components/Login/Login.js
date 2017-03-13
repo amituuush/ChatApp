@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
+import './login.scss';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +30,8 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="login-wrap">
+      <div className="login-container">
         <form onSubmit={this.onFormSubmit}>
           <input 
             type="text" 
@@ -37,6 +40,7 @@ class Login extends Component {
             onChange={this.onInputChange} />
           <button type="submit">Join the DoorDash Chat!</button>
         </form>
+      </div>
       </div>
     )
   }

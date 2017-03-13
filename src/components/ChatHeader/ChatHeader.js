@@ -11,12 +11,12 @@ export default class ChatHeader extends Component {
       users = <p>Loading...</p>;
     } else if (this.props.currentRoom.users) {
       users = this.props.currentRoom.users.map(function(name, i) {
-        return (<span key={i}>{name},</span>);
+        return (<span className="user" key={i}>{name},</span>);
       })
     }
     return (
       <div className="chat-header-container">
-        <div>{this.props.currentRoom.name}</div>
+        <div className="current-room">{this.props.currentRoom.name}</div>
         {users}
       </div>
    );
