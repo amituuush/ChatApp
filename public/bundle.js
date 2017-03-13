@@ -25178,21 +25178,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ChatHeader = function (_Component) {
   _inherits(ChatHeader, _Component);
 
-  function ChatHeader(props) {
+  function ChatHeader() {
     _classCallCheck(this, ChatHeader);
 
-    var _this = _possibleConstructorReturn(this, (ChatHeader.__proto__ || Object.getPrototypeOf(ChatHeader)).call(this, props));
-
-    _this.renderUsers = _this.renderUsers.bind(_this);
-    return _this;
+    return _possibleConstructorReturn(this, (ChatHeader.__proto__ || Object.getPrototypeOf(ChatHeader)).apply(this, arguments));
   }
 
   _createClass(ChatHeader, [{
-    key: 'renderUsers',
-    value: function renderUsers() {}
-  }, {
     key: 'render',
     value: function render() {
+      console.log('current room', this.props.currentRoom);
       var users = void 0;
       if (this.props.currentRoom.users === undefined) {
         users = _react2.default.createElement(
@@ -25203,9 +25198,10 @@ var ChatHeader = function (_Component) {
       } else if (this.props.currentRoom.users) {
         users = this.props.currentRoom.users.map(function (name, i) {
           return _react2.default.createElement(
-            'p',
+            'span',
             { key: i },
-            name
+            name,
+            ','
           );
         });
       }
@@ -25285,12 +25281,14 @@ var ChatInput = function (_Component) {
     key: 'onFormSubmit',
     value: function onFormSubmit(event) {
       event.preventDefault();
-      console.log(this.props);
-      this.props.sendMessage(this.props.currentRoom.id, this.state.message, this.props.name);
-      console.log(this.state.message);
-      this.setState({
-        message: ''
-      });
+      if (!this.state.message) {
+        alert('Enter in a message');
+      } else {
+        this.props.sendMessage(this.props.currentRoom.id, this.state.message, this.props.name);
+        this.setState({
+          message: ''
+        });
+      }
     }
   }, {
     key: 'render',
@@ -27746,6 +27744,11 @@ var sendMessage = exports.sendMessage = function sendMessage(roomId, message, na
         type: _types.SEND_MESSAGE,
         payload: messagePackage
       });
+
+      dispatch({
+        type: _types.ADD_USER_TO_ROOM,
+        payload: name
+      });
     }).catch(function (err) {
       console.log(err);
     });
@@ -29280,6 +29283,7 @@ var SELECT_CURRENT_ROOM = exports.SELECT_CURRENT_ROOM = 'SELECT_CURRENT_ROOM';
 var FETCH_MESSAGES = exports.FETCH_MESSAGES = 'FETCH_MESSAGES';
 var SAVE_USER = exports.SAVE_USER = 'SAVE_USER';
 var SEND_MESSAGE = exports.SEND_MESSAGE = 'SEND_MESSAGE';
+var ADD_USER_TO_ROOM = exports.ADD_USER_TO_ROOM = 'ADD_USER_TO_ROOM';
 
 /***/ },
 /* 295 */
@@ -31117,6 +31121,18 @@ exports.default = function () {
   switch (action.type) {
     case _types.SELECT_CURRENT_ROOM:
       return action.payload;
+    case _types.ADD_USER_TO_ROOM:
+      var newState = state;
+      var newUser = true;
+      for (var i = 0; i < newState.users.length; i++) {
+        if (newState.users[i] === action.payload) {
+          newUser = false;
+        }
+      }
+      if (newUser) {
+        newState.users.push(action.payload);
+      }
+      return newState;
   }
   return state;
 };

@@ -20,12 +20,14 @@ export default class ChatInput extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    console.log(this.props);
-    this.props.sendMessage(this.props.currentRoom.id, this.state.message, this.props.name);
-    console.log(this.state.message);
-    this.setState({
-      message: ''
-    });
+    if (!this.state.message) {
+      alert('Enter in a message');
+    } else {
+      this.props.sendMessage(this.props.currentRoom.id, this.state.message, this.props.name);
+      this.setState({
+        message: ''
+      });
+    }
   }
 
   render() {

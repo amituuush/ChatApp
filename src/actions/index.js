@@ -4,7 +4,8 @@ import {
   SELECT_CURRENT_ROOM, 
   FETCH_MESSAGES, 
   SAVE_USER, 
-  SEND_MESSAGE 
+  SEND_MESSAGE ,
+  ADD_USER_TO_ROOM
 } from './types';
 
 const API_URL = 'http://localhost:8088';
@@ -71,7 +72,12 @@ export const sendMessage = (roomId, message, name) => {
         dispatch({
           type: SEND_MESSAGE,
           payload: messagePackage
-        })
+        });
+
+        dispatch({
+          type: ADD_USER_TO_ROOM,
+          payload: name
+        });
       })
       .catch(err => {
         console.log(err);
