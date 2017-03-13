@@ -2,3 +2,4 @@ export const FETCH_ROOMS = 'FETCH_ROOMS';
 export const SELECT_CURRENT_ROOM = 'SELECT_CURRENT_ROOM';
 export const FETCH_MESSAGES = 'FETCH_MESSAGES';
 export const SAVE_USER = 'SAVE_USER';
+export const SEND_MESSAGE = 'SEND_MESSAGE';

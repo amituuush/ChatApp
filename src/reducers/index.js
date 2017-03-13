@@ -8,5 +8,5 @@ export const rootReducer = combineReducers({
   rooms: roomsReducer,
   currentRoom: currentRoomReducer,
   messages: messagesReducer,
-  username: saveUserReducer
+  name: saveUserReducer
 });

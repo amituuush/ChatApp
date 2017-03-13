@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { FETCH_ROOMS, SELECT_CURRENT_ROOM, FETCH_MESSAGES, SAVE_USER } from './types';
+import { 
+  FETCH_ROOMS, 
+  SELECT_CURRENT_ROOM, 
+  FETCH_MESSAGES, 
+  SAVE_USER, 
+  SEND_MESSAGE 
+} from './types';
 
 const API_URL = 'http://localhost:8088';
 
@@ -44,12 +50,31 @@ export const selectCurrentRoom = (roomId) => {
   }
 }
 
-export const saveUser = (username) => {
-  localStorage.setItem('username', username);
+export const saveUser = (name) => {
+  localStorage.setItem('name', name);
 
   return {
     type: SAVE_USER,
-    payload: username
+    payload: name
   }
 };
 
+export const sendMessage = (roomId, message, name) => {
+  let messagePackage = {
+    name: name,
+    message: message
+  };
+
+  return dispatch => {
+    axios.post(`${API_URL}/api/rooms/${roomId}/messages`, messagePackage)
+      .then(res => {
+        dispatch({
+          type: SEND_MESSAGE,
+          payload: messagePackage
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+}

@@ -10,14 +10,19 @@ const RightPanel = props => {
     <div className="right-panel-container">
       <ChatHeader currentRoom={props.currentRoom} />
       <ChatBox messages={props.messages} />
-      <ChatInput />
+      <ChatInput 
+        currentRoom={props.currentRoom}
+        name={props.name}
+        sendMessage={props.sendMessage} />
     </div>
   );
 }
 
 RightPanel.propTypes = {
   currentRoom: React.PropTypes.object,
-  messages: React.PropTypes.array
+  messages: React.PropTypes.array,
+  name: React.PropTypes.string,
+  sendMessage: React.PropTypes.func
 };
 
 export default RightPanel;

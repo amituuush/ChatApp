@@ -11619,16 +11619,18 @@ var App = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'app-container' },
-        !this.props.username ? _react2.default.createElement(_Login2.default, null) : _react2.default.createElement(
+        !this.props.name ? _react2.default.createElement(_Login2.default, null) : _react2.default.createElement(
           'div',
           { className: 'app-container' },
           _react2.default.createElement(_LeftPanel2.default, {
             rooms: this.props.rooms,
             selectCurrentRoom: this.props.selectCurrentRoom,
-            username: this.props.username }),
+            name: this.props.name }),
           _react2.default.createElement(_RightPanel2.default, {
             currentRoom: this.props.currentRoom,
-            messages: this.props.messages })
+            messages: this.props.messages,
+            name: this.props.name,
+            sendMessage: this.props.sendMessage })
         )
       );
     }
@@ -11641,8 +11643,10 @@ App.propTypes = {
   rooms: _react2.default.PropTypes.array,
   currentRoom: _react2.default.PropTypes.object,
   messages: _react2.default.PropTypes.array,
+  name: _react2.default.PropTypes.string,
   fetchRooms: _react2.default.PropTypes.func,
-  selectCurrentRoom: _react2.default.PropTypes.func
+  selectCurrentRoom: _react2.default.PropTypes.func,
+  sendMessage: _react2.default.PropTypes.func
 };
 
 function mapStateToProps(state) {
@@ -11650,7 +11654,7 @@ function mapStateToProps(state) {
     rooms: state.rooms,
     currentRoom: state.currentRoom,
     messages: state.messages,
-    username: state.username
+    name: state.name
   };
 }
 
@@ -11697,7 +11701,7 @@ var LeftPanel = function LeftPanel(props) {
   return _react2.default.createElement(
     'div',
     { className: 'left-panel-container' },
-    _react2.default.createElement(_NameAndTimeOnline2.default, { username: props.username }),
+    _react2.default.createElement(_NameAndTimeOnline2.default, { name: props.name }),
     _react2.default.createElement(_ChatRoomContainer2.default, {
       rooms: props.rooms,
       selectCurrentRoom: props.selectCurrentRoom })
@@ -11706,7 +11710,7 @@ var LeftPanel = function LeftPanel(props) {
 
 LeftPanel.propTypes = {
   rooms: _react2.default.PropTypes.array,
-  username: _react2.default.PropTypes.string,
+  name: _react2.default.PropTypes.string,
   selectCurrentRoom: _react2.default.PropTypes.func
 };
 
@@ -11749,13 +11753,18 @@ var RightPanel = function RightPanel(props) {
     { className: 'right-panel-container' },
     _react2.default.createElement(_ChatHeader2.default, { currentRoom: props.currentRoom }),
     _react2.default.createElement(_ChatBox2.default, { messages: props.messages }),
-    _react2.default.createElement(_ChatInput2.default, null)
+    _react2.default.createElement(_ChatInput2.default, {
+      currentRoom: props.currentRoom,
+      name: props.name,
+      sendMessage: props.sendMessage })
   );
 };
 
 RightPanel.propTypes = {
   currentRoom: _react2.default.PropTypes.object,
-  messages: _react2.default.PropTypes.array
+  messages: _react2.default.PropTypes.array,
+  name: _react2.default.PropTypes.string,
+  sendMessage: _react2.default.PropTypes.func
 };
 
 exports.default = RightPanel;
@@ -24888,7 +24897,7 @@ var NameAndTimeOnline = function NameAndTimeOnline(props) {
     _react2.default.createElement(
       'h2',
       null,
-      props.username
+      props.name
     ),
     _react2.default.createElement(
       'p',
@@ -24899,7 +24908,7 @@ var NameAndTimeOnline = function NameAndTimeOnline(props) {
 };
 
 NameAndTimeOnline.propTypes = {
-  username: _react2.default.PropTypes.string
+  name: _react2.default.PropTypes.string
 };
 
 exports.default = NameAndTimeOnline;
@@ -25276,7 +25285,8 @@ var ChatInput = function (_Component) {
     key: 'onFormSubmit',
     value: function onFormSubmit(event) {
       event.preventDefault();
-      // this.props.saveUser(this.state.username);
+      console.log(this.props);
+      this.props.sendMessage(this.props.currentRoom.id, this.state.message, this.props.name);
       console.log(this.state.message);
       this.setState({
         message: ''
@@ -25312,7 +25322,11 @@ var ChatInput = function (_Component) {
 exports.default = ChatInput;
 
 
-ChatInput.propTypes = {};
+ChatInput.propTypes = {
+  currentRoom: _react2.default.PropTypes.object,
+  name: _react2.default.PropTypes.string,
+  sendMessage: _react2.default.PropTypes.func
+};
 
 /***/ },
 /* 213 */
@@ -27664,7 +27678,7 @@ module.exports = function(module) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.saveUser = exports.selectCurrentRoom = exports.fetchRooms = undefined;
+exports.sendMessage = exports.saveUser = exports.selectCurrentRoom = exports.fetchRooms = undefined;
 
 var _axios = __webpack_require__(276);
 
@@ -27711,12 +27725,30 @@ var selectCurrentRoom = exports.selectCurrentRoom = function selectCurrentRoom(r
   };
 };
 
-var saveUser = exports.saveUser = function saveUser(username) {
-  localStorage.setItem('username', username);
+var saveUser = exports.saveUser = function saveUser(name) {
+  localStorage.setItem('name', name);
 
   return {
     type: _types.SAVE_USER,
-    payload: username
+    payload: name
+  };
+};
+
+var sendMessage = exports.sendMessage = function sendMessage(roomId, message, name) {
+  var messagePackage = {
+    name: name,
+    message: message
+  };
+
+  return function (dispatch) {
+    _axios2.default.post(API_URL + '/api/rooms/' + roomId + '/messages', messagePackage).then(function (res) {
+      dispatch({
+        type: _types.SEND_MESSAGE,
+        payload: messagePackage
+      });
+    }).catch(function (err) {
+      console.log(err);
+    });
   };
 };
 
@@ -29247,6 +29279,7 @@ var FETCH_ROOMS = exports.FETCH_ROOMS = 'FETCH_ROOMS';
 var SELECT_CURRENT_ROOM = exports.SELECT_CURRENT_ROOM = 'SELECT_CURRENT_ROOM';
 var FETCH_MESSAGES = exports.FETCH_MESSAGES = 'FETCH_MESSAGES';
 var SAVE_USER = exports.SAVE_USER = 'SAVE_USER';
+var SEND_MESSAGE = exports.SEND_MESSAGE = 'SEND_MESSAGE';
 
 /***/ },
 /* 295 */
@@ -31010,7 +31043,7 @@ var rootReducer = exports.rootReducer = (0, _redux.combineReducers)({
   rooms: _rooms_reducer2.default,
   currentRoom: _current_room_reducer2.default,
   messages: _messages_reducer2.default,
-  username: _save_user_reducer2.default
+  name: _save_user_reducer2.default
 });
 
 /***/ },
@@ -31108,6 +31141,8 @@ exports.default = function () {
   switch (action.type) {
     case _types.FETCH_MESSAGES:
       return action.payload;
+    case _types.SEND_MESSAGE:
+      return state.concat(action.payload);
   }
   return state;
 };

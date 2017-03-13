@@ -20,7 +20,8 @@ export default class ChatInput extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    // this.props.saveUser(this.state.username);
+    console.log(this.props);
+    this.props.sendMessage(this.props.currentRoom.id, this.state.message, this.props.name);
     console.log(this.state.message);
     this.setState({
       message: ''
@@ -44,5 +45,7 @@ export default class ChatInput extends Component {
 }
 
 ChatInput.propTypes = {
-  
+  currentRoom: React.PropTypes.object,
+  name: React.PropTypes.string,
+  sendMessage: React.PropTypes.func
 };
