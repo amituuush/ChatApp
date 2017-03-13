@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import Login from '../Login/Login';
 import LeftPanel from '../LeftPanel/LeftPanel';
 import RightPanel from '../RightPanel/RightPanel';
 
@@ -15,6 +16,9 @@ class App extends Component {
 
   render() {
     return (
+      <div>
+      {!this.props.username ? 
+        <Login /> :
       <div className="app-container">
         <LeftPanel 
           rooms={this.props.rooms}
@@ -23,6 +27,8 @@ class App extends Component {
           currentRoom={this.props.currentRoom}
           messages={this.props.messages} />
       </div>
+    }
+    </div>
     )
   }
 }
@@ -39,7 +45,8 @@ function mapStateToProps(state) {
   return {
     rooms: state.rooms,
     currentRoom: state.currentRoom,
-    messages: state.messages
+    messages: state.messages,
+    username: state.username
   }
 }
 

@@ -11574,6 +11574,10 @@ var _actions = __webpack_require__(268);
 
 var actions = _interopRequireWildcard(_actions);
 
+var _Login = __webpack_require__(315);
+
+var _Login2 = _interopRequireDefault(_Login);
+
 var _LeftPanel = __webpack_require__(85);
 
 var _LeftPanel2 = _interopRequireDefault(_LeftPanel);
@@ -11614,13 +11618,17 @@ var App = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'app-container' },
-        _react2.default.createElement(_LeftPanel2.default, {
-          rooms: this.props.rooms,
-          selectCurrentRoom: this.props.selectCurrentRoom }),
-        _react2.default.createElement(_RightPanel2.default, {
-          currentRoom: this.props.currentRoom,
-          messages: this.props.messages })
+        null,
+        !this.props.username ? _react2.default.createElement(_Login2.default, null) : _react2.default.createElement(
+          'div',
+          { className: 'app-container' },
+          _react2.default.createElement(_LeftPanel2.default, {
+            rooms: this.props.rooms,
+            selectCurrentRoom: this.props.selectCurrentRoom }),
+          _react2.default.createElement(_RightPanel2.default, {
+            currentRoom: this.props.currentRoom,
+            messages: this.props.messages })
+        )
       );
     }
   }]);
@@ -11640,7 +11648,8 @@ function mapStateToProps(state) {
   return {
     rooms: state.rooms,
     currentRoom: state.currentRoom,
-    messages: state.messages
+    messages: state.messages,
+    username: state.username
   };
 }
 
@@ -31056,6 +31065,56 @@ exports.default = function () {
 };
 
 var _types = __webpack_require__(294);
+
+/***/ },
+/* 315 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(25);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Login = function (_Component) {
+  _inherits(Login, _Component);
+
+  function Login(props) {
+    _classCallCheck(this, Login);
+
+    return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+  }
+
+  _createClass(Login, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        'supsies'
+      );
+    }
+  }]);
+
+  return Login;
+}(_react.Component);
+
+exports.default = Login;
 
 /***/ }
 /******/ ]);
