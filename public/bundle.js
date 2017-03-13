@@ -25807,11 +25807,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var API_URL = 'http://localhost:8088';
-
 	var fetchRooms = exports.fetchRooms = function fetchRooms() {
 	  return function (dispatch) {
-	    _axios2.default.get(API_URL + '/api/rooms').then(function (res) {
+	    _axios2.default.get('/api/rooms').then(function (res) {
 	      dispatch({
 	        type: _types.FETCH_ROOMS,
 	        payload: res.data
@@ -25824,7 +25822,7 @@
 
 	var selectCurrentRoom = exports.selectCurrentRoom = function selectCurrentRoom(roomId) {
 	  return function (dispatch) {
-	    _axios2.default.get(API_URL + '/api/rooms/' + roomId).then(function (res) {
+	    _axios2.default.get('/api/rooms/' + roomId).then(function (res) {
 	      dispatch({
 	        type: _types.SELECT_CURRENT_ROOM,
 	        payload: res.data
@@ -25833,7 +25831,7 @@
 	      console.log(err);
 	    });
 
-	    _axios2.default.get(API_URL + '/api/rooms/' + roomId + '/messages').then(function (res) {
+	    _axios2.default.get('/api/rooms/' + roomId + '/messages').then(function (res) {
 	      dispatch({
 	        type: _types.FETCH_MESSAGES,
 	        payload: res.data
@@ -25860,7 +25858,7 @@
 	  };
 
 	  return function (dispatch) {
-	    _axios2.default.post(API_URL + '/api/rooms/' + roomId + '/messages', messagePackage).then(function (res) {
+	    _axios2.default.post('/api/rooms/' + roomId + '/messages', messagePackage).then(function (res) {
 	      dispatch({
 	        type: _types.SEND_MESSAGE,
 	        payload: messagePackage
@@ -31278,7 +31276,6 @@
 
 	  switch (action.type) {
 	    case _types.UPDATE_TIMER:
-	      console.log('reducer here');
 	      return state + 1;
 	  }
 	  return state;

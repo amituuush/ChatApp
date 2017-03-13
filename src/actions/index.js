@@ -9,11 +9,10 @@ import {
   UPDATE_TIMER
 } from './types';
 
-const API_URL = 'http://localhost:8088';
 
 export const fetchRooms = () => {
   return dispatch => {
-    axios.get(`${API_URL}/api/rooms`)
+    axios.get('/api/rooms')
       .then(res => {
         dispatch({
           type: FETCH_ROOMS,
@@ -28,7 +27,7 @@ export const fetchRooms = () => {
 
 export const selectCurrentRoom = (roomId) => {
   return dispatch => {
-    axios.get(`${API_URL}/api/rooms/${roomId}`)
+    axios.get(`/api/rooms/${roomId}`)
       .then(res => {
         dispatch({
           type: SELECT_CURRENT_ROOM,
@@ -39,7 +38,7 @@ export const selectCurrentRoom = (roomId) => {
         console.log(err);
       });
     
-     axios.get(`${API_URL}/api/rooms/${roomId}/messages`)
+     axios.get(`/api/rooms/${roomId}/messages`)
       .then(res => {
         dispatch({
           type: FETCH_MESSAGES,
@@ -68,7 +67,7 @@ export const sendMessage = (roomId, message, name) => {
   };
 
   return dispatch => {
-    axios.post(`${API_URL}/api/rooms/${roomId}/messages`, messagePackage)
+    axios.post(`/api/rooms/${roomId}/messages`, messagePackage)
       .then(res => {
         dispatch({
           type: SEND_MESSAGE,
