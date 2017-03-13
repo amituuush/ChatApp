@@ -11607,6 +11607,7 @@ var App = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.props.fetchRooms();
+      this.props.selectCurrentRoom(0);
     }
   }, {
     key: 'render',
@@ -11614,8 +11615,10 @@ var App = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'app-container' },
-        _react2.default.createElement(_LeftPanel2.default, { rooms: this.props.rooms }),
-        _react2.default.createElement(_RightPanel2.default, null)
+        _react2.default.createElement(_LeftPanel2.default, {
+          rooms: this.props.rooms,
+          selectCurrentRoom: this.props.selectCurrentRoom }),
+        _react2.default.createElement(_RightPanel2.default, { currentRoom: this.props.currentRoom })
       );
     }
   }]);
@@ -11625,12 +11628,15 @@ var App = function (_Component) {
 
 App.propTypes = {
   rooms: _react2.default.PropTypes.array,
-  fetchRooms: _react2.default.PropTypes.func
+  currentRoom: _react2.default.PropTypes.object,
+  fetchRooms: _react2.default.PropTypes.func,
+  selectCurrentRoom: _react2.default.PropTypes.func
 };
 
 function mapStateToProps(state) {
   return {
-    rooms: state.rooms
+    rooms: state.rooms,
+    currentRoom: state.currentRoom
   };
 }
 
@@ -11674,17 +11680,19 @@ __webpack_require__(191);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var LeftPanel = function LeftPanel(props) {
-  console.log(props.rooms);
   return _react2.default.createElement(
     'div',
     { className: 'left-panel-container' },
     _react2.default.createElement(_NameAndTimeOnline2.default, null),
-    _react2.default.createElement(_ChatRoomContainer2.default, { rooms: props.rooms })
+    _react2.default.createElement(_ChatRoomContainer2.default, {
+      rooms: props.rooms,
+      selectCurrentRoom: props.selectCurrentRoom })
   );
 };
 
 LeftPanel.propTypes = {
-  rooms: _react2.default.PropTypes.array
+  rooms: _react2.default.PropTypes.array,
+  selectCurrentRoom: _react2.default.PropTypes.func
 };
 
 exports.default = LeftPanel;
@@ -11724,13 +11732,15 @@ var RightPanel = function RightPanel(props) {
   return _react2.default.createElement(
     'div',
     { className: 'right-panel-container' },
-    _react2.default.createElement(_ChatHeader2.default, null),
+    _react2.default.createElement(_ChatHeader2.default, { currentRoom: props.currentRoom }),
     _react2.default.createElement(_ChatBox2.default, null),
     _react2.default.createElement(_ChatInput2.default, null)
   );
 };
 
-RightPanel.propTypes = {};
+RightPanel.propTypes = {
+  currentRoom: _react2.default.PropTypes.object
+};
 
 exports.default = RightPanel;
 
@@ -24821,14 +24831,17 @@ var ChatRoomContainer = function ChatRoomContainer(props) {
     props.rooms.map(function (room) {
       return _react2.default.createElement(_ChatRoom2.default, {
         name: room.name,
-        key: room.id
+        id: room.id,
+        key: room.id,
+        selectCurrentRoom: props.selectCurrentRoom
       });
     })
   );
 };
 
 ChatRoomContainer.propTypes = {
-  rooms: _react2.default.PropTypes.array
+  rooms: _react2.default.PropTypes.array,
+  selectCurrentRoom: _react2.default.PropTypes.func
 };
 
 exports.default = ChatRoomContainer;
@@ -24926,6 +24939,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(25);
 
 var _react2 = _interopRequireDefault(_react);
@@ -24934,19 +24949,52 @@ __webpack_require__(209);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ChatRoom = function ChatRoom(props) {
-  return _react2.default.createElement(
-    'div',
-    { className: 'chat-room-container' },
-    props.name
-  );
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-ChatRoom.propTypes = {
-  name: _react2.default.PropTypes.string
-};
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ChatRoom = function (_Component) {
+  _inherits(ChatRoom, _Component);
+
+  function ChatRoom(props) {
+    _classCallCheck(this, ChatRoom);
+
+    var _this = _possibleConstructorReturn(this, (ChatRoom.__proto__ || Object.getPrototypeOf(ChatRoom)).call(this, props));
+
+    _this.handleSelectCurrentRoom = _this.handleSelectCurrentRoom.bind(_this);
+    return _this;
+  }
+
+  _createClass(ChatRoom, [{
+    key: 'handleSelectCurrentRoom',
+    value: function handleSelectCurrentRoom() {
+      this.props.selectCurrentRoom(this.props.id);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'chat-room-container',
+          onClick: this.handleSelectCurrentRoom },
+        this.props.name
+      );
+    }
+  }]);
+
+  return ChatRoom;
+}(_react.Component);
 
 exports.default = ChatRoom;
+
+
+ChatRoom.propTypes = {
+  name: _react2.default.PropTypes.string,
+  id: _react2.default.PropTypes.number,
+  selectCurrentRoom: _react2.default.PropTypes.func
+};
 
 /***/ },
 /* 206 */
@@ -25078,6 +25126,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(25);
 
 var _react2 = _interopRequireDefault(_react);
@@ -25086,26 +25136,68 @@ __webpack_require__(217);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ChatHeader = function ChatHeader(props) {
-  return _react2.default.createElement(
-    'div',
-    { className: 'chat-header-container' },
-    _react2.default.createElement(
-      'div',
-      null,
-      'Engineering'
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
-      'Amit, Jack, Sam'
-    )
-  );
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-ChatHeader.propTypes = {};
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ChatHeader = function (_Component) {
+  _inherits(ChatHeader, _Component);
+
+  function ChatHeader(props) {
+    _classCallCheck(this, ChatHeader);
+
+    var _this = _possibleConstructorReturn(this, (ChatHeader.__proto__ || Object.getPrototypeOf(ChatHeader)).call(this, props));
+
+    _this.renderUsers = _this.renderUsers.bind(_this);
+    return _this;
+  }
+
+  _createClass(ChatHeader, [{
+    key: 'renderUsers',
+    value: function renderUsers() {}
+  }, {
+    key: 'render',
+    value: function render() {
+      var users = void 0;
+      if (this.props.currentRoom.users === undefined) {
+        users = _react2.default.createElement(
+          'p',
+          null,
+          'Loading...'
+        );
+      } else if (this.props.currentRoom.users) {
+        users = this.props.currentRoom.users.map(function (name, i) {
+          return _react2.default.createElement(
+            'p',
+            { key: i },
+            name
+          );
+        });
+      }
+      return _react2.default.createElement(
+        'div',
+        { className: 'chat-header-container' },
+        _react2.default.createElement(
+          'div',
+          null,
+          this.props.currentRoom.name
+        ),
+        users
+      );
+    }
+  }]);
+
+  return ChatHeader;
+}(_react.Component);
 
 exports.default = ChatHeader;
+
+
+ChatHeader.propTypes = {
+  currentRoom: _react2.default.PropTypes.object
+};
 
 /***/ },
 /* 212 */
@@ -27489,7 +27581,7 @@ module.exports = function(module) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchRooms = undefined;
+exports.selectCurrentRoom = exports.fetchRooms = undefined;
 
 var _axios = __webpack_require__(276);
 
@@ -27506,6 +27598,20 @@ var fetchRooms = exports.fetchRooms = function fetchRooms() {
     _axios2.default.get(API_URL + '/api/rooms').then(function (res) {
       dispatch({
         type: _types.FETCH_ROOMS,
+        payload: res.data
+      });
+    }).catch(function (err) {
+      console.log(err);
+    });
+  };
+};
+
+var selectCurrentRoom = exports.selectCurrentRoom = function selectCurrentRoom(roomId) {
+  return function (dispatch) {
+    _axios2.default.get(API_URL + '/api/rooms/' + roomId).then(function (res) {
+      console.log('current room', res.data);
+      dispatch({
+        type: _types.SELECT_CURRENT_ROOM,
         payload: res.data
       });
     }).catch(function (err) {
@@ -29038,6 +29144,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var FETCH_ROOMS = exports.FETCH_ROOMS = 'FETCH_ROOMS';
+var SELECT_CURRENT_ROOM = exports.SELECT_CURRENT_ROOM = 'SELECT_CURRENT_ROOM';
 
 /***/ },
 /* 295 */
@@ -30771,10 +30878,15 @@ var _rooms_reducer = __webpack_require__(310);
 
 var _rooms_reducer2 = _interopRequireDefault(_rooms_reducer);
 
+var _current_room_reducer = __webpack_require__(312);
+
+var _current_room_reducer2 = _interopRequireDefault(_current_room_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = exports.rootReducer = (0, _redux.combineReducers)({
-  rooms: _rooms_reducer2.default
+  rooms: _rooms_reducer2.default,
+  currentRoom: _current_room_reducer2.default
 });
 
 /***/ },
@@ -30829,6 +30941,30 @@ var thunk = createThunkMiddleware();
 thunk.withExtraArgument = createThunkMiddleware;
 
 exports['default'] = thunk;
+
+/***/ },
+/* 312 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _types.SELECT_CURRENT_ROOM:
+      return action.payload;
+  }
+  return state;
+};
+
+var _types = __webpack_require__(294);
 
 /***/ }
 /******/ ]);

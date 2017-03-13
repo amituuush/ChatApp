@@ -7,7 +7,7 @@
     "start": "node server.js",
     "api-server": "node server.js",
     "postinstall": "webpack -p",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
     "tdd": "npm test -- --watch",
     "dev": "webpack-dev-server --port 3000 --devtool eval --progress --colors --hot --content-base dist",
     "build": "webpack -p"

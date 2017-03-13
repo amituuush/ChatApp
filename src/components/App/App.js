@@ -10,13 +10,16 @@ class App extends Component {
 
   componentDidMount() {
     this.props.fetchRooms();
+    this.props.selectCurrentRoom(0);
   }
 
   render() {
     return (
       <div className="app-container">
-        <LeftPanel rooms={this.props.rooms} />
-        <RightPanel />
+        <LeftPanel 
+          rooms={this.props.rooms}
+          selectCurrentRoom={this.props.selectCurrentRoom} />
+        <RightPanel currentRoom={this.props.currentRoom} />
       </div>
     )
   }
@@ -24,12 +27,15 @@ class App extends Component {
 
 App.propTypes = {
   rooms: React.PropTypes.array,
-  fetchRooms: React.PropTypes.func
+  currentRoom: React.PropTypes.object,
+  fetchRooms: React.PropTypes.func,
+  selectCurrentRoom: React.PropTypes.func
 };
 
 function mapStateToProps(state) {
   return {
-    rooms: state.rooms
+    rooms: state.rooms,
+    currentRoom: state.currentRoom
   }
 }
 

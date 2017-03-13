@@ -11,7 +11,9 @@ const ChatRoomContainer = props => {
           return (
             <ChatRoom 
               name={room.name}
+              id={room.id}
               key={room.id}
+              selectCurrentRoom={props.selectCurrentRoom}
              />
           )
         })
@@ -21,7 +23,8 @@ const ChatRoomContainer = props => {
 }
 
 ChatRoomContainer.propTypes = {
-  rooms: React.PropTypes.array
+  rooms: React.PropTypes.array,
+  selectCurrentRoom: React.PropTypes.func
 };
 
 export default ChatRoomContainer;

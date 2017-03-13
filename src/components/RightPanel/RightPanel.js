@@ -8,7 +8,7 @@ import './right-panel.scss';
 const RightPanel = props => {
   return (
     <div className="right-panel-container">
-      <ChatHeader />
+      <ChatHeader currentRoom={props.currentRoom} />
       <ChatBox />
       <ChatInput />
     </div>
@@ -16,7 +16,7 @@ const RightPanel = props => {
 }
 
 RightPanel.propTypes = {
-  
+  currentRoom: React.PropTypes.object
 };
 
 export default RightPanel;

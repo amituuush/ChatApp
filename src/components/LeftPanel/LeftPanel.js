@@ -5,17 +5,19 @@ import ChatRoomContainer from '../ChatRoomContainer/ChatRoomContainer';
 import './left-panel.scss';
 
 const LeftPanel = props => {
-  console.log(props.rooms)
   return (
     <div className="left-panel-container">
       <NameAndTimeOnline />
-      <ChatRoomContainer rooms={props.rooms} />
+      <ChatRoomContainer 
+        rooms={props.rooms}
+        selectCurrentRoom={props.selectCurrentRoom} />
     </div>
   );
 }
 
 LeftPanel.propTypes = {
-  rooms: React.PropTypes.array
+  rooms: React.PropTypes.array,
+  selectCurrentRoom: React.PropTypes.func
 };
 
 export default LeftPanel;
