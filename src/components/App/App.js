@@ -29,7 +29,8 @@ class App extends Component {
               currentRoom={this.props.currentRoom}
               messages={this.props.messages}
               name={this.props.name}
-              sendMessage={this.props.sendMessage} />
+              sendMessage={this.props.sendMessage}
+              name={this.props.name} />
           </div>
         }
         </div>

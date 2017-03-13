@@ -11592,6 +11592,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -11627,11 +11629,12 @@ var App = function (_Component) {
             selectCurrentRoom: this.props.selectCurrentRoom,
             name: this.props.name,
             currentRoom: this.props.currentRoom }),
-          _react2.default.createElement(_RightPanel2.default, {
+          _react2.default.createElement(_RightPanel2.default, _defineProperty({
             currentRoom: this.props.currentRoom,
             messages: this.props.messages,
             name: this.props.name,
-            sendMessage: this.props.sendMessage })
+            sendMessage: this.props.sendMessage
+          }, 'name', this.props.name))
         )
       );
     }
@@ -11753,7 +11756,9 @@ var RightPanel = function RightPanel(props) {
   return _react2.default.createElement(
     'div',
     { className: 'right-panel-container' },
-    _react2.default.createElement(_ChatHeader2.default, { currentRoom: props.currentRoom }),
+    _react2.default.createElement(_ChatHeader2.default, {
+      currentRoom: props.currentRoom,
+      name: props.name }),
     _react2.default.createElement(_ChatBox2.default, { messages: props.messages }),
     _react2.default.createElement(_ChatInput2.default, {
       currentRoom: props.currentRoom,
@@ -25191,9 +25196,9 @@ var ChatHeader = function (_Component) {
   _createClass(ChatHeader, [{
     key: 'render',
     value: function render() {
-      console.log('current room', this.props.currentRoom);
       var users = void 0;
       var currentRoomUsers = this.props.currentRoom.users;
+      var currentUser = this.props.name;
       if (currentRoomUsers === undefined) {
         users = _react2.default.createElement(
           'p',
@@ -25205,13 +25210,13 @@ var ChatHeader = function (_Component) {
           if (i === currentRoomUsers.length - 1) {
             return _react2.default.createElement(
               'span',
-              { className: 'user', key: i },
+              { className: name === currentUser ? "user active-user" : "user", key: i },
               name
             );
           } else {
             return _react2.default.createElement(
               'span',
-              { className: 'user', key: i },
+              { className: name === currentUser ? "user active-user" : "user", key: i },
               name,
               ', '
             );
@@ -25238,7 +25243,8 @@ exports.default = ChatHeader;
 
 
 ChatHeader.propTypes = {
-  currentRoom: _react2.default.PropTypes.object
+  currentRoom: _react2.default.PropTypes.object,
+  name: _react2.default.PropTypes.string
 };
 
 /***/ },
@@ -25366,7 +25372,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, ".chat-header-container {\n  width: 100%;\n  padding: 1.7em 0em;\n  box-shadow: 0px 1px 6px #C7C9CA;\n  background: #fff;\n  position: fixed;\n  top: 0;\n  z-index: 9999;\n  text-align: center; }\n  .chat-header-container .current-room {\n    color: #696969;\n    font-size: 1.4em;\n    padding-bottom: 0.4em; }\n  .chat-header-container .user {\n    color: #696969;\n    font-size: 0.9em; }\n", ""]);
+exports.push([module.i, ".chat-header-container {\n  width: 100%;\n  padding: 1.7em 0em;\n  box-shadow: 0px 1px 6px #C7C9CA;\n  background: #fff;\n  position: fixed;\n  top: 0;\n  z-index: 9999;\n  text-align: center; }\n  .chat-header-container .current-room {\n    color: #696969;\n    font-size: 1.4em;\n    padding-bottom: 0.4em; }\n  .chat-header-container .user {\n    color: #696969;\n    font-size: 0.9em; }\n  .chat-header-container .active-user {\n    color: #FF1940; }\n", ""]);
 
 // exports
 

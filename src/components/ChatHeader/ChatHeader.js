@@ -5,17 +5,17 @@ import './chat-header.scss';
 export default class ChatHeader extends Component {
 
   render () {
-    console.log('current room', this.props.currentRoom);
     let users;
     const currentRoomUsers = this.props.currentRoom.users;
+    const currentUser = this.props.name;
      if (currentRoomUsers === undefined) {
       users = <p>Loading...</p>;
     } else if (currentRoomUsers) {
       users = currentRoomUsers.map(function(name, i) {
         if (i === currentRoomUsers.length - 1) {
-          return (<span className="user" key={i}>{name}</span>);
+          return (<span className={name === currentUser ? "user active-user" : "user"} key={i}>{name}</span>);
         } else {
-          return (<span className="user" key={i}>{name}, </span>);
+          return (<span className={name === currentUser ? "user active-user" : "user"} key={i}>{name}, </span>);
         }
       })
     }
@@ -29,5 +29,6 @@ export default class ChatHeader extends Component {
 }
 
 ChatHeader.propTypes = {
-  currentRoom: React.PropTypes.object
+  currentRoom: React.PropTypes.object,
+  name: React.PropTypes.string
 };
