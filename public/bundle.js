@@ -27609,9 +27609,18 @@ var fetchRooms = exports.fetchRooms = function fetchRooms() {
 var selectCurrentRoom = exports.selectCurrentRoom = function selectCurrentRoom(roomId) {
   return function (dispatch) {
     _axios2.default.get(API_URL + '/api/rooms/' + roomId).then(function (res) {
-      console.log('current room', res.data);
       dispatch({
         type: _types.SELECT_CURRENT_ROOM,
+        payload: res.data
+      });
+    }).catch(function (err) {
+      console.log(err);
+    });
+
+    _axios2.default.get(API_URL + '/api/rooms/' + roomId + '/messages').then(function (res) {
+      console.log('messages', res.data);
+      dispatch({
+        type: _types.FETCH_MESSAGES,
         payload: res.data
       });
     }).catch(function (err) {
@@ -29145,6 +29154,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var FETCH_ROOMS = exports.FETCH_ROOMS = 'FETCH_ROOMS';
 var SELECT_CURRENT_ROOM = exports.SELECT_CURRENT_ROOM = 'SELECT_CURRENT_ROOM';
+var FETCH_MESSAGES = exports.FETCH_MESSAGES = 'FETCH_MESSAGES';
 
 /***/ },
 /* 295 */
@@ -30882,11 +30892,16 @@ var _current_room_reducer = __webpack_require__(312);
 
 var _current_room_reducer2 = _interopRequireDefault(_current_room_reducer);
 
+var _messages_reducer = __webpack_require__(313);
+
+var _messages_reducer2 = _interopRequireDefault(_messages_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = exports.rootReducer = (0, _redux.combineReducers)({
   rooms: _rooms_reducer2.default,
-  currentRoom: _current_room_reducer2.default
+  currentRoom: _current_room_reducer2.default,
+  messages: _messages_reducer2.default
 });
 
 /***/ },
@@ -30959,6 +30974,30 @@ exports.default = function () {
 
   switch (action.type) {
     case _types.SELECT_CURRENT_ROOM:
+      return action.payload;
+  }
+  return state;
+};
+
+var _types = __webpack_require__(294);
+
+/***/ },
+/* 313 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _types.FETCH_MESSAGES:
       return action.payload;
   }
   return state;
