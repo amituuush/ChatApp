@@ -5,13 +5,15 @@ import './message.scss';
 const Message = props => {
   return (
     <div className="message-container">
-      I'm a message
+      {props.message}
+      {props.name}
     </div>
   );
 }
 
 Message.propTypes = {
-  
+  message: React.PropTypes.string,
+  name: React.PropTypes.string
 };
 
 export default Message;

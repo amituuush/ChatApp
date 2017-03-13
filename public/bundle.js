@@ -11618,7 +11618,9 @@ var App = function (_Component) {
         _react2.default.createElement(_LeftPanel2.default, {
           rooms: this.props.rooms,
           selectCurrentRoom: this.props.selectCurrentRoom }),
-        _react2.default.createElement(_RightPanel2.default, { currentRoom: this.props.currentRoom })
+        _react2.default.createElement(_RightPanel2.default, {
+          currentRoom: this.props.currentRoom,
+          messages: this.props.messages })
       );
     }
   }]);
@@ -11629,6 +11631,7 @@ var App = function (_Component) {
 App.propTypes = {
   rooms: _react2.default.PropTypes.array,
   currentRoom: _react2.default.PropTypes.object,
+  messages: _react2.default.PropTypes.array,
   fetchRooms: _react2.default.PropTypes.func,
   selectCurrentRoom: _react2.default.PropTypes.func
 };
@@ -11636,7 +11639,8 @@ App.propTypes = {
 function mapStateToProps(state) {
   return {
     rooms: state.rooms,
-    currentRoom: state.currentRoom
+    currentRoom: state.currentRoom,
+    messages: state.messages
   };
 }
 
@@ -11733,13 +11737,14 @@ var RightPanel = function RightPanel(props) {
     'div',
     { className: 'right-panel-container' },
     _react2.default.createElement(_ChatHeader2.default, { currentRoom: props.currentRoom }),
-    _react2.default.createElement(_ChatBox2.default, null),
+    _react2.default.createElement(_ChatBox2.default, { messages: props.messages }),
     _react2.default.createElement(_ChatInput2.default, null)
   );
 };
 
 RightPanel.propTypes = {
-  currentRoom: _react2.default.PropTypes.object
+  currentRoom: _react2.default.PropTypes.object,
+  messages: _react2.default.PropTypes.array
 };
 
 exports.default = RightPanel;
@@ -25100,18 +25105,23 @@ __webpack_require__(216);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ChatBox = function ChatBox(props) {
+
+  var messages = props.messages.map(function (message, i) {
+    return _react2.default.createElement(_Message2.default, {
+      message: message.message,
+      name: message.name });
+  });
+
   return _react2.default.createElement(
     'div',
     { className: 'chat-box-container' },
-    _react2.default.createElement(_Message2.default, null),
-    _react2.default.createElement(_Message2.default, null),
-    _react2.default.createElement(_Message2.default, null),
-    _react2.default.createElement(_Message2.default, null),
-    _react2.default.createElement(_Message2.default, null)
+    messages
   );
 };
 
-ChatBox.propTypes = {};
+ChatBox.propTypes = {
+  messages: _react2.default.PropTypes.array
+};
 
 exports.default = ChatBox;
 
@@ -25378,11 +25388,15 @@ var Message = function Message(props) {
   return _react2.default.createElement(
     'div',
     { className: 'message-container' },
-    'I\'m a message'
+    props.message,
+    props.name
   );
 };
 
-Message.propTypes = {};
+Message.propTypes = {
+  message: _react2.default.PropTypes.string,
+  name: _react2.default.PropTypes.string
+};
 
 exports.default = Message;
 
@@ -30993,7 +31007,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
   switch (action.type) {
