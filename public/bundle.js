@@ -47416,6 +47416,7 @@
 	      null,
 	      props.name
 	    ),
+	    _react2.default.createElement('div', null),
 	    _react2.default.createElement(
 	      'p',
 	      null,
@@ -47465,7 +47466,7 @@
 
 
 	// module
-	exports.push([module.id, ".name-and-time-online-container {\n  padding: 2em; }\n  .name-and-time-online-container h2, .name-and-time-online-container p {\n    color: #fff; }\n  .name-and-time-online-container h2 {\n    margin: 0em;\n    font-size: 1.25em; }\n  .name-and-time-online-container p {\n    font-size: 0.9em;\n    margin-top: 0.5em; }\n", ""]);
+	exports.push([module.id, ".name-and-time-online-container {\n  padding: 2em; }\n  .name-and-time-online-container h2, .name-and-time-online-container p {\n    color: #fff; }\n  .name-and-time-online-container h2 {\n    margin: 0em;\n    font-size: 1.25em;\n    display: inline-block; }\n  .name-and-time-online-container div {\n    height: 10px;\n    width: 10px;\n    border-radius: 50%;\n    background: #4FB74C;\n    display: inline-block;\n    margin-left: 0.4em;\n    margin-bottom: 0.1em; }\n  .name-and-time-online-container p {\n    font-size: 0.9em;\n    margin-top: 0.5em; }\n", ""]);
 
 	// exports
 
@@ -48052,7 +48053,7 @@
 
 
 	// module
-	exports.push([module.id, ".message-container {\n  clear: both;\n  float: left; }\n  .message-container .message-bubble {\n    background: #fff;\n    padding: 0.4em 0.75em 0.4em 0.75em;\n    border-radius: 20px;\n    font-size: 0.9em;\n    margin-bottom: 0.4em;\n    margin-top: 1.1em; }\n  .message-container .red {\n    background: #FF1940;\n    color: #fff; }\n  .message-container .message-name {\n    font-size: 0.9em;\n    color: #666666; }\n\n.right {\n  float: right; }\n", ""]);
+	exports.push([module.id, ".message-container {\n  clear: both;\n  float: left; }\n  .message-container .message-bubble {\n    background: #fff;\n    padding: 0.5em 0.9em 0.5em 0.9em;\n    border-radius: 20px;\n    font-size: 0.8em;\n    margin-bottom: 0.4em;\n    margin-top: 1.1em; }\n  .message-container .red {\n    background: #FF1940;\n    color: #fff; }\n  .message-container .message-name {\n    font-size: 0.8em;\n    color: #666666; }\n\n.right {\n  float: right; }\n", ""]);
 
 	// exports
 

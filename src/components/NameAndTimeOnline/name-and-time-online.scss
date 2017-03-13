@@ -7,6 +7,17 @@
   h2 {
     margin: 0em;
     font-size: 1.25em;
+    display: inline-block;
+  }
+
+  div {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: #4FB74C;
+    display: inline-block;
+    margin-left: 0.4em;
+    margin-bottom: 0.1em;
   }
 
   p {
