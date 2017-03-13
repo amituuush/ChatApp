@@ -2,11 +2,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import reduxThunk from 'redux-thunk';
 import reduxPromise from 'redux-promise';
 import createLogger from 'redux-logger';
-import { throttle } from 'lodash';
 import { rootReducer } from './reducers';
-import { loadState, saveState } from './localStorage';
-
-const persistedState = loadState();
 
 const middlewares = [
   reduxThunk,
@@ -22,14 +18,8 @@ const enhancers = compose(
 const store = createStore(
   rootReducer,
   {},
-  enhancers,
-  persistedState
+  enhancers
 );
 
-store.subscribe(throttle(() => {
-  saveState({
-    username: store.getState().username
-  });
-}, 1000))
 
 export default store;

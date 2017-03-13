@@ -15,7 +15,7 @@
   "engines": {
     "node": ">=7.0.0"
   },
-  "author": "Ryan Gonzalez",
+  "author": "Amit Ranan",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.23.1",
@@ -41,6 +41,7 @@
     "sass-loader": "^6.0.3",
     "serve": "^3.1.0",
     "sinon": "^1.17.7",
+    "standard": "^9.0.1",
     "style-loader": "^0.13.2"
   },
   "repository": "https://github.com/amituuush/ChatApp.git",

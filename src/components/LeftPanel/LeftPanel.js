@@ -7,7 +7,9 @@ import './left-panel.scss';
 const LeftPanel = props => {
   return (
     <div className="left-panel-container">
-      <NameAndTimeOnline name={props.name} />
+      <NameAndTimeOnline 
+        name={props.name}
+        timeOnline={props.timeOnline} />
       <ChatRoomContainer 
         rooms={props.rooms}
         selectCurrentRoom={props.selectCurrentRoom}

@@ -5,7 +5,8 @@ import {
   FETCH_MESSAGES, 
   SAVE_USER, 
   SEND_MESSAGE ,
-  ADD_USER_TO_ROOM
+  ADD_USER_TO_ROOM,
+  UPDATE_TIMER
 } from './types';
 
 const API_URL = 'http://localhost:8088';
@@ -83,4 +84,10 @@ export const sendMessage = (roomId, message, name) => {
         console.log(err);
       });
   }
+};
+
+export const updateTimer = () => {
+  return {
+    type: UPDATE_TIMER
+  };
 }

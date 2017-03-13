@@ -12,6 +12,10 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchRooms();
     this.props.selectCurrentRoom(0);
+
+    setInterval(() => {
+      this.props.updateTimer();
+    }, 60000)
   }
 
   render() {
@@ -24,7 +28,8 @@ class App extends Component {
               rooms={this.props.rooms}
               selectCurrentRoom={this.props.selectCurrentRoom}
               name={this.props.name}
-              currentRoom={this.props.currentRoom} />
+              currentRoom={this.props.currentRoom}
+              timeOnline={this.props.timeOnline} />
             <RightPanel 
               currentRoom={this.props.currentRoom}
               messages={this.props.messages}
@@ -43,9 +48,11 @@ App.propTypes = {
   currentRoom: React.PropTypes.object,
   messages: React.PropTypes.array,
   name: React.PropTypes.string,
+  timeOnline: React.PropTypes.number,
   fetchRooms: React.PropTypes.func,
   selectCurrentRoom: React.PropTypes.func,
-  sendMessage: React.PropTypes.func
+  sendMessage: React.PropTypes.func,
+  updateTimer: React.PropTypes.func
 };
 
 function mapStateToProps(state) {
@@ -53,7 +60,8 @@ function mapStateToProps(state) {
     rooms: state.rooms,
     currentRoom: state.currentRoom,
     messages: state.messages,
-    name: state.name
+    name: state.name,
+    timeOnline: state.timeOnline
   }
 }
 
