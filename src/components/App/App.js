@@ -14,8 +14,12 @@ class App extends Component {
     this.props.selectCurrentRoom(0);
 
     setInterval(() => {
+      this.props.fetchRooms();
+    }, 5000)
+
+    setInterval(() => {
       this.props.updateTimer();
-    }, 60000)
+    }, 60000);
   }
 
   render() {

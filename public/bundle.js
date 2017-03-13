@@ -25732,6 +25732,10 @@
 	      this.props.selectCurrentRoom(0);
 
 	      setInterval(function () {
+	        _this2.props.fetchRooms();
+	      }, 5000);
+
+	      setInterval(function () {
 	        _this2.props.updateTimer();
 	      }, 60000);
 	    }
