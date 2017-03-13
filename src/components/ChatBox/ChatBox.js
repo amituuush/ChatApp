@@ -8,7 +8,8 @@ const ChatBox = props => {
   let messages = props.messages.map(function(message, i) {
     return <Message
             message={message.message}
-            name={message.name} />
+            name={message.name}
+            key={i} />
   })
 
   return (

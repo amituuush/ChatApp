@@ -25109,7 +25109,8 @@ var ChatBox = function ChatBox(props) {
   var messages = props.messages.map(function (message, i) {
     return _react2.default.createElement(_Message2.default, {
       message: message.message,
-      name: message.name });
+      name: message.name,
+      key: i });
   });
 
   return _react2.default.createElement(
@@ -27595,7 +27596,7 @@ module.exports = function(module) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectCurrentRoom = exports.fetchRooms = undefined;
+exports.saveUser = exports.selectCurrentRoom = exports.fetchRooms = undefined;
 
 var _axios = __webpack_require__(276);
 
@@ -27640,6 +27641,13 @@ var selectCurrentRoom = exports.selectCurrentRoom = function selectCurrentRoom(r
     }).catch(function (err) {
       console.log(err);
     });
+  };
+};
+
+var saveUser = exports.saveUser = function saveUser(username) {
+  return {
+    type: _types.SAVE_USER,
+    payload: username
   };
 };
 
@@ -29169,6 +29177,7 @@ Object.defineProperty(exports, "__esModule", {
 var FETCH_ROOMS = exports.FETCH_ROOMS = 'FETCH_ROOMS';
 var SELECT_CURRENT_ROOM = exports.SELECT_CURRENT_ROOM = 'SELECT_CURRENT_ROOM';
 var FETCH_MESSAGES = exports.FETCH_MESSAGES = 'FETCH_MESSAGES';
+var SAVE_USER = exports.SAVE_USER = 'SAVE_USER';
 
 /***/ },
 /* 295 */
@@ -30910,12 +30919,17 @@ var _messages_reducer = __webpack_require__(313);
 
 var _messages_reducer2 = _interopRequireDefault(_messages_reducer);
 
+var _save_user_reducer = __webpack_require__(314);
+
+var _save_user_reducer2 = _interopRequireDefault(_save_user_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = exports.rootReducer = (0, _redux.combineReducers)({
   rooms: _rooms_reducer2.default,
   currentRoom: _current_room_reducer2.default,
-  messages: _messages_reducer2.default
+  messages: _messages_reducer2.default,
+  username: _save_user_reducer2.default
 });
 
 /***/ },
@@ -31012,6 +31026,30 @@ exports.default = function () {
 
   switch (action.type) {
     case _types.FETCH_MESSAGES:
+      return action.payload;
+  }
+  return state;
+};
+
+var _types = __webpack_require__(294);
+
+/***/ },
+/* 314 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _types.SAVE_USER:
       return action.payload;
   }
   return state;

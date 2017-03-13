@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_ROOMS, SELECT_CURRENT_ROOM, FETCH_MESSAGES } from './types';
+import { FETCH_ROOMS, SELECT_CURRENT_ROOM, FETCH_MESSAGES, SAVE_USER } from './types';
 
 const API_URL = 'http://localhost:8088';
 
@@ -44,3 +44,10 @@ export const selectCurrentRoom = (roomId) => {
       });
   }
 }
+
+export const saveUser = (username) => {
+  return {
+    type: SAVE_USER,
+    payload: username
+  }
+};
