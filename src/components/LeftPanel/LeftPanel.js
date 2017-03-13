@@ -9,7 +9,8 @@ const LeftPanel = props => {
     <div className="left-panel-container">
       <NameAndTimeOnline 
         name={props.name}
-        timeOnline={props.timeOnline} />
+        timeOnline={props.timeOnline}
+        logoutUser={props.logoutUser} />
       <ChatRoomContainer 
         rooms={props.rooms}
         selectCurrentRoom={props.selectCurrentRoom}

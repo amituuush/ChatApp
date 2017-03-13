@@ -6,7 +6,8 @@ import {
   SAVE_USER, 
   SEND_MESSAGE ,
   ADD_USER_TO_ROOM,
-  UPDATE_TIMER
+  UPDATE_TIMER,
+  LOGOUT_USER
 } from './types';
 
 
@@ -59,6 +60,14 @@ export const saveUser = (name) => {
     payload: name
   }
 };
+
+export const logoutUser = () => {
+  localStorage.removeItem('name');
+  return {
+    type: LOGOUT_USER,
+    payload: ''
+  }
+}
 
 export const sendMessage = (roomId, message, name) => {
   let messagePackage = {

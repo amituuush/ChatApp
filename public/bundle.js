@@ -25581,6 +25581,7 @@
 	var SEND_MESSAGE = exports.SEND_MESSAGE = 'SEND_MESSAGE';
 	var ADD_USER_TO_ROOM = exports.ADD_USER_TO_ROOM = 'ADD_USER_TO_ROOM';
 	var UPDATE_TIMER = exports.UPDATE_TIMER = 'UPDATE_TIMER';
+	var LOGOUT_USER = exports.LOGOUT_USER = 'LOGOUT_USER';
 
 /***/ },
 /* 235 */
@@ -25659,6 +25660,8 @@
 	  switch (action.type) {
 	    case _types.SAVE_USER:
 	      return action.payload;
+	    case _types.LOGOUT_USER:
+	      return action.payload;
 	  }
 	  return state;
 	};
@@ -25726,18 +25729,15 @@
 	  _createClass(App, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _this2 = this;
-
+	      var nameExists = localStorage.getItem('name');
+	      if (nameExists) {
+	        this.props.saveUser(nameExists);
+	      }
 	      this.props.fetchRooms();
 	      this.props.selectCurrentRoom(0);
 
-	      setInterval(function () {
-	        _this2.props.fetchRooms();
-	      }, 5000);
-
-	      setInterval(function () {
-	        _this2.props.updateTimer();
-	      }, 60000);
+	      setInterval(this.props.fetchRooms, 5000);
+	      setInterval(this.props.updateTimer, 60000);
 	    }
 	  }, {
 	    key: 'render',
@@ -25753,7 +25753,8 @@
 	            selectCurrentRoom: this.props.selectCurrentRoom,
 	            name: this.props.name,
 	            currentRoom: this.props.currentRoom,
-	            timeOnline: this.props.timeOnline }),
+	            timeOnline: this.props.timeOnline,
+	            logoutUser: this.props.logoutUser }),
 	          _react2.default.createElement(_RightPanel2.default, _defineProperty({
 	            currentRoom: this.props.currentRoom,
 	            messages: this.props.messages,
@@ -25801,7 +25802,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.updateTimer = exports.sendMessage = exports.saveUser = exports.selectCurrentRoom = exports.fetchRooms = undefined;
+	exports.updateTimer = exports.sendMessage = exports.logoutUser = exports.saveUser = exports.selectCurrentRoom = exports.fetchRooms = undefined;
 
 	var _axios = __webpack_require__(241);
 
@@ -25852,6 +25853,14 @@
 	  return {
 	    type: _types.SAVE_USER,
 	    payload: name
+	  };
+	};
+
+	var logoutUser = exports.logoutUser = function logoutUser() {
+	  localStorage.removeItem('name');
+	  return {
+	    type: _types.LOGOUT_USER,
+	    payload: ''
 	  };
 	};
 
@@ -30268,7 +30277,8 @@
 	    { className: 'left-panel-container' },
 	    _react2.default.createElement(_NameAndTimeOnline2.default, {
 	      name: props.name,
-	      timeOnline: props.timeOnline }),
+	      timeOnline: props.timeOnline,
+	      logoutUser: props.logoutUser }),
 	    _react2.default.createElement(_ChatRoomContainer2.default, {
 	      rooms: props.rooms,
 	      selectCurrentRoom: props.selectCurrentRoom,
@@ -30318,7 +30328,7 @@
 	      null,
 	      props.name
 	    ),
-	    _react2.default.createElement('div', null),
+	    _react2.default.createElement('div', { className: 'active-dot' }),
 	    _react2.default.createElement(
 	      'p',
 	      null,
@@ -30326,6 +30336,11 @@
 	      props.timeOnline,
 	      ' ',
 	      minutesText
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { onClick: props.logoutUser },
+	      'Logout'
 	    )
 	  );
 	};
@@ -30371,7 +30386,7 @@
 
 
 	// module
-	exports.push([module.id, ".name-and-time-online-container {\n  padding: 2em; }\n  .name-and-time-online-container h2, .name-and-time-online-container p {\n    color: #fff; }\n  .name-and-time-online-container h2 {\n    margin: 0em;\n    font-size: 1.25em;\n    display: inline-block; }\n  .name-and-time-online-container div {\n    height: 10px;\n    width: 10px;\n    border-radius: 50%;\n    background: #4FB74C;\n    display: inline-block;\n    margin-left: 0.4em;\n    margin-bottom: 0.1em; }\n  .name-and-time-online-container p {\n    font-size: 0.9em;\n    margin-top: 0.5em; }\n", ""]);
+	exports.push([module.id, ".name-and-time-online-container {\n  padding: 2em; }\n  .name-and-time-online-container h2, .name-and-time-online-container p {\n    color: #fff; }\n  .name-and-time-online-container h2 {\n    margin: 0em;\n    font-size: 1.25em;\n    display: inline-block; }\n  .name-and-time-online-container .active-dot {\n    height: 10px;\n    width: 10px;\n    border-radius: 50%;\n    background: #4FB74C;\n    display: inline-block;\n    margin-left: 0.4em;\n    margin-bottom: 0.1em; }\n  .name-and-time-online-container p {\n    font-size: 0.9em;\n    margin-top: 0.5em; }\n  .name-and-time-online-container div {\n    color: #DCDDDE;\n    font-size: 0.8em; }\n    .name-and-time-online-container div:hover {\n      cursor: pointer; }\n", ""]);
 
 	// exports
 
@@ -30790,7 +30805,7 @@
 
 
 	// module
-	exports.push([module.id, ".chat-header-container {\n  width: 100%;\n  padding: 1.7em 0em;\n  box-shadow: 0px 1px 6px #C7C9CA;\n  background: #fff;\n  position: fixed;\n  top: 0;\n  z-index: 9999;\n  text-align: center; }\n  .chat-header-container .current-room {\n    color: #696969;\n    font-size: 1.4em;\n    padding-bottom: 0.4em; }\n  .chat-header-container .user {\n    color: #696969;\n    font-size: 0.9em; }\n  .chat-header-container .active-user {\n    color: #FF1940; }\n", ""]);
+	exports.push([module.id, ".chat-header-container {\n  width: calc(100% - 203px);\n  padding: 1.7em 0em;\n  box-shadow: 0px 1px 6px #C7C9CA;\n  background: #fff;\n  position: fixed;\n  top: 0;\n  z-index: 9999;\n  text-align: center; }\n  .chat-header-container .current-room {\n    color: #696969;\n    font-size: 1.4em;\n    padding-bottom: 0.4em; }\n  .chat-header-container .user {\n    color: #696969;\n    font-size: 0.9em; }\n  .chat-header-container .active-user {\n    color: #FF1940; }\n", ""]);
 
 	// exports
 

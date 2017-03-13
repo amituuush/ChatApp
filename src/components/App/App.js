@@ -10,16 +10,15 @@ import './app.scss';
 class App extends Component {
 
   componentDidMount() {
+    let nameExists = localStorage.getItem('name');
+    if (nameExists) {
+      this.props.saveUser(nameExists);
+    }
     this.props.fetchRooms();
     this.props.selectCurrentRoom(0);
 
-    setInterval(() => {
-      this.props.fetchRooms();
-    }, 5000)
-
-    setInterval(() => {
-      this.props.updateTimer();
-    }, 60000);
+    setInterval(this.props.fetchRooms, 5000);
+    setInterval(this.props.updateTimer, 60000);
   }
 
   render() {
@@ -33,7 +32,8 @@ class App extends Component {
               selectCurrentRoom={this.props.selectCurrentRoom}
               name={this.props.name}
               currentRoom={this.props.currentRoom}
-              timeOnline={this.props.timeOnline} />
+              timeOnline={this.props.timeOnline}
+              logoutUser={this.props.logoutUser} />
             <RightPanel 
               currentRoom={this.props.currentRoom}
               messages={this.props.messages}
