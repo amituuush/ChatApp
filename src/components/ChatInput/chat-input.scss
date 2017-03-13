@@ -18,6 +18,12 @@
       margin-bottom: 1em;
       margin-right: 1em;
       font-weight: 100;
+      border: 1px solid #fff;
+
+      &:focus {
+        outline: none;
+        border: 1px solid #b6d2f3;
+      }
     }
 
     button {
@@ -27,6 +33,10 @@
 
       &:hover {
         cursor: pointer;
+      }
+
+      &:focus {
+        outline: none;
       }
     }
   }

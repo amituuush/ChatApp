@@ -25193,20 +25193,29 @@ var ChatHeader = function (_Component) {
     value: function render() {
       console.log('current room', this.props.currentRoom);
       var users = void 0;
-      if (this.props.currentRoom.users === undefined) {
+      var currentRoomUsers = this.props.currentRoom.users;
+      if (currentRoomUsers === undefined) {
         users = _react2.default.createElement(
           'p',
           null,
           'Loading...'
         );
-      } else if (this.props.currentRoom.users) {
-        users = this.props.currentRoom.users.map(function (name, i) {
-          return _react2.default.createElement(
-            'span',
-            { className: 'user', key: i },
-            name,
-            ','
-          );
+      } else if (currentRoomUsers) {
+        users = currentRoomUsers.map(function (name, i) {
+          if (i === currentRoomUsers.length - 1) {
+            return _react2.default.createElement(
+              'span',
+              { className: 'user', key: i },
+              name
+            );
+          } else {
+            return _react2.default.createElement(
+              'span',
+              { className: 'user', key: i },
+              name,
+              ', '
+            );
+          }
         });
       }
       return _react2.default.createElement(
@@ -25371,7 +25380,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, ".chat-input-wrap {\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  height: 2.5em;\n  background: #fff;\n  box-shadow: 0px 0px 6px #C7C9CA;\n  padding: 1.5em; }\n  .chat-input-wrap .chat-input-container input {\n    width: 60%;\n    max-width: 34em;\n    border-radius: 3px;\n    border: none;\n    box-shadow: inset 0px 0px 2px #95979b;\n    padding: 0.7em;\n    margin-bottom: 1em;\n    margin-right: 1em;\n    font-weight: 100; }\n  .chat-input-wrap .chat-input-container button {\n    color: #4A90E2;\n    background: #fff;\n    border: none; }\n    .chat-input-wrap .chat-input-container button:hover {\n      cursor: pointer; }\n", ""]);
+exports.push([module.i, ".chat-input-wrap {\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  height: 2.5em;\n  background: #fff;\n  box-shadow: 0px 0px 6px #C7C9CA;\n  padding: 1.5em; }\n  .chat-input-wrap .chat-input-container input {\n    width: 60%;\n    max-width: 34em;\n    border-radius: 3px;\n    border: none;\n    box-shadow: inset 0px 0px 2px #95979b;\n    padding: 0.7em;\n    margin-bottom: 1em;\n    margin-right: 1em;\n    font-weight: 100;\n    border: 1px solid #fff; }\n    .chat-input-wrap .chat-input-container input:focus {\n      outline: none;\n      border: 1px solid #b6d2f3; }\n  .chat-input-wrap .chat-input-container button {\n    color: #4A90E2;\n    background: #fff;\n    border: none; }\n    .chat-input-wrap .chat-input-container button:hover {\n      cursor: pointer; }\n    .chat-input-wrap .chat-input-container button:focus {\n      outline: none; }\n", ""]);
 
 // exports
 
@@ -48431,7 +48440,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, ".login-wrap {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  text-align: center; }\n  .login-wrap .login-container {\n    text-align: center;\n    width: 20em;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    margin: -7em 0 0 -10em; }\n    .login-wrap .login-container input {\n      display: block;\n      width: 100%;\n      border-radius: 3px;\n      border: none;\n      box-shadow: inset 0px 0px 2px #95979b;\n      padding: 0.7em;\n      margin-bottom: 1em;\n      font-weight: 100; }\n    .login-wrap .login-container button {\n      display: block;\n      width: 21.4em;\n      background: #FF1940;\n      border: none;\n      border-radius: 3px;\n      color: #fff;\n      padding: 0.7em; }\n      .login-wrap .login-container button:hover {\n        cursor: pointer; }\n", ""]);
+exports.push([module.i, ".login-wrap {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  text-align: center; }\n  .login-wrap .login-container {\n    text-align: center;\n    width: 20em;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    margin: -7em 0 0 -10em; }\n    .login-wrap .login-container input {\n      display: block;\n      width: 100%;\n      border-radius: 3px;\n      border: none;\n      box-shadow: inset 0px 0px 2px #95979b;\n      padding: 0.7em;\n      margin-bottom: 1em;\n      font-weight: 100;\n      border: 1px solid #fff; }\n      .login-wrap .login-container input:focus {\n        outline: none;\n        border: 1px solid #b6d2f3; }\n    .login-wrap .login-container button {\n      display: block;\n      width: 21.4em;\n      background: #FF1940;\n      border: none;\n      border-radius: 3px;\n      color: #fff;\n      padding: 0.7em; }\n      .login-wrap .login-container button:hover {\n        cursor: pointer; }\n      .login-wrap .login-container button:focus {\n        outline: none; }\n", ""]);
 
 // exports
 

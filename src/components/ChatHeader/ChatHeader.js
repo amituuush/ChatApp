@@ -7,11 +7,16 @@ export default class ChatHeader extends Component {
   render () {
     console.log('current room', this.props.currentRoom);
     let users;
-     if (this.props.currentRoom.users === undefined) {
+    const currentRoomUsers = this.props.currentRoom.users;
+     if (currentRoomUsers === undefined) {
       users = <p>Loading...</p>;
-    } else if (this.props.currentRoom.users) {
-      users = this.props.currentRoom.users.map(function(name, i) {
-        return (<span className="user" key={i}>{name},</span>);
+    } else if (currentRoomUsers) {
+      users = currentRoomUsers.map(function(name, i) {
+        if (i === currentRoomUsers.length - 1) {
+          return (<span className="user" key={i}>{name}</span>);
+        } else {
+          return (<span className="user" key={i}>{name}, </span>);
+        }
       })
     }
     return (
