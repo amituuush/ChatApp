@@ -14,7 +14,7 @@ export default class ChatRoom extends Component {
 
   render() {
     return (
-      <div className="chat-room-container" 
+      <div className={this.props.id === this.props.currentRoom.id ? "chat-room-container active" : "chat-room-container"} 
       onClick={this.handleSelectCurrentRoom}>
         {this.props.name}
       </div>
@@ -25,5 +25,6 @@ export default class ChatRoom extends Component {
 ChatRoom.propTypes = {
   name: React.PropTypes.string,
   id: React.PropTypes.number,
+  currentRoom: React.PropTypes.object,
   selectCurrentRoom: React.PropTypes.func
 };

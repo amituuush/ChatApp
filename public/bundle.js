@@ -11625,7 +11625,8 @@ var App = function (_Component) {
           _react2.default.createElement(_LeftPanel2.default, {
             rooms: this.props.rooms,
             selectCurrentRoom: this.props.selectCurrentRoom,
-            name: this.props.name }),
+            name: this.props.name,
+            currentRoom: this.props.currentRoom }),
           _react2.default.createElement(_RightPanel2.default, {
             currentRoom: this.props.currentRoom,
             messages: this.props.messages,
@@ -11704,7 +11705,8 @@ var LeftPanel = function LeftPanel(props) {
     _react2.default.createElement(_NameAndTimeOnline2.default, { name: props.name }),
     _react2.default.createElement(_ChatRoomContainer2.default, {
       rooms: props.rooms,
-      selectCurrentRoom: props.selectCurrentRoom })
+      selectCurrentRoom: props.selectCurrentRoom,
+      currentRoom: props.currentRoom })
   );
 };
 
@@ -24858,7 +24860,8 @@ var ChatRoomContainer = function ChatRoomContainer(props) {
         name: room.name,
         id: room.id,
         key: room.id,
-        selectCurrentRoom: props.selectCurrentRoom
+        selectCurrentRoom: props.selectCurrentRoom,
+        currentRoom: props.currentRoom
       });
     })
   );
@@ -25004,7 +25007,7 @@ var ChatRoom = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'chat-room-container',
+        { className: this.props.id === this.props.currentRoom.id ? "chat-room-container active" : "chat-room-container",
           onClick: this.handleSelectCurrentRoom },
         this.props.name
       );
@@ -25020,6 +25023,7 @@ exports.default = ChatRoom;
 ChatRoom.propTypes = {
   name: _react2.default.PropTypes.string,
   id: _react2.default.PropTypes.number,
+  currentRoom: _react2.default.PropTypes.object,
   selectCurrentRoom: _react2.default.PropTypes.func
 };
 
@@ -25072,7 +25076,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, ".chat-room-container {\n  color: #fff;\n  padding: 1em 0em 1em 2em; }\n", ""]);
+exports.push([module.i, ".chat-room-container {\n  color: #fff;\n  padding: 1em 0em 1em 2em; }\n  .chat-room-container:hover {\n    cursor: pointer;\n    background: #e51639; }\n\n.active {\n  background: #7F0D1F; }\n", ""]);
 
 // exports
 

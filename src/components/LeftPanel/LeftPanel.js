@@ -10,7 +10,8 @@ const LeftPanel = props => {
       <NameAndTimeOnline name={props.name} />
       <ChatRoomContainer 
         rooms={props.rooms}
-        selectCurrentRoom={props.selectCurrentRoom} />
+        selectCurrentRoom={props.selectCurrentRoom}
+        currentRoom={props.currentRoom} />
     </div>
   );
 }

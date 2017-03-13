@@ -14,6 +14,7 @@ const ChatRoomContainer = props => {
               id={room.id}
               key={room.id}
               selectCurrentRoom={props.selectCurrentRoom}
+              currentRoom={props.currentRoom}
              />
           )
         })

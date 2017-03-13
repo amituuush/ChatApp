@@ -23,7 +23,8 @@ class App extends Component {
             <LeftPanel 
               rooms={this.props.rooms}
               selectCurrentRoom={this.props.selectCurrentRoom}
-              name={this.props.name} />
+              name={this.props.name}
+              currentRoom={this.props.currentRoom} />
             <RightPanel 
               currentRoom={this.props.currentRoom}
               messages={this.props.messages}
