@@ -11618,13 +11618,14 @@ var App = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'app-container' },
         !this.props.username ? _react2.default.createElement(_Login2.default, null) : _react2.default.createElement(
           'div',
           { className: 'app-container' },
           _react2.default.createElement(_LeftPanel2.default, {
             rooms: this.props.rooms,
-            selectCurrentRoom: this.props.selectCurrentRoom }),
+            selectCurrentRoom: this.props.selectCurrentRoom,
+            username: this.props.username }),
           _react2.default.createElement(_RightPanel2.default, {
             currentRoom: this.props.currentRoom,
             messages: this.props.messages })
@@ -11696,7 +11697,7 @@ var LeftPanel = function LeftPanel(props) {
   return _react2.default.createElement(
     'div',
     { className: 'left-panel-container' },
-    _react2.default.createElement(_NameAndTimeOnline2.default, null),
+    _react2.default.createElement(_NameAndTimeOnline2.default, { username: props.username }),
     _react2.default.createElement(_ChatRoomContainer2.default, {
       rooms: props.rooms,
       selectCurrentRoom: props.selectCurrentRoom })
@@ -11705,6 +11706,7 @@ var LeftPanel = function LeftPanel(props) {
 
 LeftPanel.propTypes = {
   rooms: _react2.default.PropTypes.array,
+  username: _react2.default.PropTypes.string,
   selectCurrentRoom: _react2.default.PropTypes.func
 };
 
@@ -24886,7 +24888,7 @@ var NameAndTimeOnline = function NameAndTimeOnline(props) {
     _react2.default.createElement(
       'h2',
       null,
-      'Amit Ranan'
+      props.username
     ),
     _react2.default.createElement(
       'p',
@@ -24896,7 +24898,9 @@ var NameAndTimeOnline = function NameAndTimeOnline(props) {
   );
 };
 
-NameAndTimeOnline.propTypes = {};
+NameAndTimeOnline.propTypes = {
+  username: _react2.default.PropTypes.string
+};
 
 exports.default = NameAndTimeOnline;
 

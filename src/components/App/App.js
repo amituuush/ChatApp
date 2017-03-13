@@ -16,19 +16,20 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+        <div className="app-container">
         {!this.props.username ? 
           <Login /> :
           <div className="app-container">
             <LeftPanel 
               rooms={this.props.rooms}
-              selectCurrentRoom={this.props.selectCurrentRoom} />
+              selectCurrentRoom={this.props.selectCurrentRoom}
+              username={this.props.username} />
             <RightPanel 
               currentRoom={this.props.currentRoom}
               messages={this.props.messages} />
           </div>
         }
-    </div>
+        </div>
     );
   }
 }
