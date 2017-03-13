@@ -30923,7 +30923,7 @@
 	    ),
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'message-name' },
+	      { className: isCurrentUser ? "message-name hide" : "message-name" },
 	      props.messageName
 	    )
 	  );
@@ -30973,7 +30973,7 @@
 
 
 	// module
-	exports.push([module.id, ".message-container {\n  clear: both;\n  float: left; }\n  .message-container .message-bubble {\n    background: #fff;\n    padding: 0.5em 0.9em 0.5em 0.9em;\n    border-radius: 20px;\n    font-size: 0.8em;\n    margin-bottom: 0.4em;\n    margin-top: 1.1em; }\n  .message-container .red {\n    background: #FF1940;\n    color: #fff; }\n  .message-container .message-name {\n    font-size: 0.8em;\n    color: #666666; }\n\n.right {\n  float: right; }\n", ""]);
+	exports.push([module.id, ".message-container {\n  max-width: 50%;\n  clear: both;\n  float: left; }\n  .message-container .message-bubble {\n    background: #fff;\n    padding: 0.5em 0.9em 0.5em 0.9em;\n    border-radius: 20px;\n    font-size: 0.8em;\n    margin-bottom: 0.4em;\n    margin-top: 1.1em;\n    line-height: 1.5em; }\n  .message-container .red {\n    background: #FF1940;\n    color: #fff; }\n  .message-container .message-name {\n    font-size: 0.8em;\n    color: #666666; }\n  .message-container .hide {\n    display: none; }\n\n.right {\n  float: right; }\n", ""]);
 
 	// exports
 
