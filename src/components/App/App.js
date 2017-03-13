@@ -17,19 +17,19 @@ class App extends Component {
   render() {
     return (
       <div>
-      {!this.props.username ? 
-        <Login /> :
-      <div className="app-container">
-        <LeftPanel 
-          rooms={this.props.rooms}
-          selectCurrentRoom={this.props.selectCurrentRoom} />
-        <RightPanel 
-          currentRoom={this.props.currentRoom}
-          messages={this.props.messages} />
-      </div>
-    }
+        {!this.props.username ? 
+          <Login /> :
+          <div className="app-container">
+            <LeftPanel 
+              rooms={this.props.rooms}
+              selectCurrentRoom={this.props.selectCurrentRoom} />
+            <RightPanel 
+              currentRoom={this.props.currentRoom}
+              messages={this.props.messages} />
+          </div>
+        }
     </div>
-    )
+    );
   }
 }
 

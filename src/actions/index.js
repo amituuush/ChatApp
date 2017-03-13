@@ -33,7 +33,6 @@ export const selectCurrentRoom = (roomId) => {
     
      axios.get(`${API_URL}/api/rooms/${roomId}/messages`)
       .then(res => {
-        console.log('messages', res.data);
         dispatch({
           type: FETCH_MESSAGES,
           payload: res.data
@@ -46,6 +45,8 @@ export const selectCurrentRoom = (roomId) => {
 }
 
 export const saveUser = (username) => {
+  localStorage.setItem('username', username);
+
   return {
     type: SAVE_USER,
     payload: username
