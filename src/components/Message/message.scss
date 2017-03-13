@@ -1,4 +1,28 @@
 .message-container {
-  // position: absolute;
-  // bottom: 0;
+  // max-width: 50%;
+  clear: both;
+  float: left;
+
+  .message-bubble {
+    background: #fff;
+    padding: 0.4em 0.75em 0.4em 0.75em;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-bottom: 0.4em;
+    margin-top: 1.1em;
+  }
+
+  .red {
+    background: #FF1940;
+    color: #fff;
+  }
+
+  .message-name {
+    font-size: 0.9em;
+    color: #666666;
+  }
+}
+
+.right {
+  float: right;
 }

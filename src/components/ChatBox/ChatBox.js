@@ -1,26 +1,34 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import Message from '../Message/Message';
 
 import './chat-box.scss';
 
-const ChatBox = props => {
+export default class ChatBox extends Component {
 
-  let messages = props.messages.map(function(message, i) {
+  // componentDidUpdate() {
+  //   // ReactDOM.findDOMNode(this.refs.scrollbar).scrollBottom = 
+  //   var node = this.getDOMNode();
+  //   node.scrollTop = node.scrollHeight;
+  // }
+
+  render () {
+    let messages = this.props.messages.map((message, i) => {
     return <Message
             message={message.message}
-            name={message.name}
+            messageName={message.name}
+            name={this.props.name}
             key={i} />
-  })
+    });
 
-  return (
-    <div className="chat-box-container">
-      {messages}
-    </div>
-  );
+    return (
+      <div className="chat-box-container">
+        {messages}
+      </div>
+    );
+  }
 }
 
 ChatBox.propTypes = {
-  messages: React.PropTypes.array
+  messages: React.PropTypes.array,
+  name: React.PropTypes.string
 };
-
-export default ChatBox;

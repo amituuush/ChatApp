@@ -11759,7 +11759,10 @@ var RightPanel = function RightPanel(props) {
     _react2.default.createElement(_ChatHeader2.default, {
       currentRoom: props.currentRoom,
       name: props.name }),
-    _react2.default.createElement(_ChatBox2.default, { messages: props.messages }),
+    _react2.default.createElement(_ChatBox2.default, {
+      messages: props.messages,
+      currentRoom: props.currentRoom,
+      name: props.name }),
     _react2.default.createElement(_ChatInput2.default, {
       currentRoom: props.currentRoom,
       name: props.name,
@@ -25123,6 +25126,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(25);
 
 var _react2 = _interopRequireDefault(_react);
@@ -25135,27 +25140,60 @@ __webpack_require__(216);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ChatBox = function ChatBox(props) {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  var messages = props.messages.map(function (message, i) {
-    return _react2.default.createElement(_Message2.default, {
-      message: message.message,
-      name: message.name,
-      key: i });
-  });
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-  return _react2.default.createElement(
-    'div',
-    { className: 'chat-box-container' },
-    messages
-  );
-};
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-ChatBox.propTypes = {
-  messages: _react2.default.PropTypes.array
-};
+var ChatBox = function (_Component) {
+  _inherits(ChatBox, _Component);
+
+  function ChatBox() {
+    _classCallCheck(this, ChatBox);
+
+    return _possibleConstructorReturn(this, (ChatBox.__proto__ || Object.getPrototypeOf(ChatBox)).apply(this, arguments));
+  }
+
+  _createClass(ChatBox, [{
+    key: 'render',
+
+
+    // componentDidUpdate() {
+    //   // ReactDOM.findDOMNode(this.refs.scrollbar).scrollBottom = 
+    //   var node = this.getDOMNode();
+    //   node.scrollTop = node.scrollHeight;
+    // }
+
+    value: function render() {
+      var _this2 = this;
+
+      var messages = this.props.messages.map(function (message, i) {
+        return _react2.default.createElement(_Message2.default, {
+          message: message.message,
+          messageName: message.name,
+          name: _this2.props.name,
+          key: i });
+      });
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'chat-box-container' },
+        messages
+      );
+    }
+  }]);
+
+  return ChatBox;
+}(_react.Component);
 
 exports.default = ChatBox;
+
+
+ChatBox.propTypes = {
+  messages: _react2.default.PropTypes.array,
+  name: _react2.default.PropTypes.string
+};
 
 /***/ },
 /* 211 */
@@ -25358,7 +25396,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, ".chat-box-container {\n  background: #EFF1F2;\n  height: 100%;\n  position: relative;\n  margin-top: 8em; }\n", ""]);
+exports.push([module.i, ".chat-box-container {\n  background: #EFF1F2;\n  height: 100%;\n  position: relative;\n  margin-top: 6.7em;\n  margin-bottom: 5.6em;\n  overflow: auto;\n  width: calc(100% - 32px);\n  padding: 0 1em; }\n", ""]);
 
 // exports
 
@@ -25489,17 +25527,32 @@ __webpack_require__(221);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Message = function Message(props) {
+  var isCurrentUser = false;
+  if (props.name === props.messageName) {
+    isCurrentUser = true;
+  }
+
   return _react2.default.createElement(
     'div',
-    { className: 'message-container' },
-    props.message,
-    props.name
+    { className: isCurrentUser ? "message-container right" : "message-container" },
+    _react2.default.createElement(
+      'div',
+      { className: isCurrentUser ? "message-bubble red" : "message-bubble" },
+      props.message
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'message-name' },
+      props.messageName
+    )
   );
 };
 
 Message.propTypes = {
   message: _react2.default.PropTypes.string,
-  name: _react2.default.PropTypes.string
+  messageName: _react2.default.PropTypes.string,
+  name: _react2.default.PropTypes.string,
+  currentRoom: _react2.default.PropTypes.object
 };
 
 exports.default = Message;
@@ -25513,7 +25566,7 @@ exports = module.exports = __webpack_require__(54)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".message-container {\n  clear: both;\n  float: left; }\n  .message-container .message-bubble {\n    background: #fff;\n    padding: 0.4em 0.75em 0.4em 0.75em;\n    border-radius: 20px;\n    font-size: 0.9em;\n    margin-bottom: 0.4em;\n    margin-top: 1.1em; }\n  .message-container .red {\n    background: #FF1940;\n    color: #fff; }\n  .message-container .message-name {\n    font-size: 0.9em;\n    color: #666666; }\n\n.right {\n  float: right; }\n", ""]);
 
 // exports
 

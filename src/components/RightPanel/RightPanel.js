@@ -11,7 +11,10 @@ const RightPanel = props => {
       <ChatHeader 
         currentRoom={props.currentRoom}
         name={props.name} />
-      <ChatBox messages={props.messages} />
+      <ChatBox 
+        messages={props.messages}
+        currentRoom={props.currentRoom}
+        name={props.name} />
       <ChatInput 
         currentRoom={props.currentRoom}
         name={props.name}
