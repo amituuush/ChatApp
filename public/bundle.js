@@ -25234,6 +25234,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(25);
 
 var _react2 = _interopRequireDefault(_react);
@@ -25242,22 +25244,75 @@ __webpack_require__(218);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ChatInput = function ChatInput(props) {
-  return _react2.default.createElement(
-    'div',
-    { className: 'chat-input-container' },
-    _react2.default.createElement('input', { type: 'text' }),
-    _react2.default.createElement(
-      'button',
-      null,
-      'Send'
-    )
-  );
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-ChatInput.propTypes = {};
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ChatInput = function (_Component) {
+  _inherits(ChatInput, _Component);
+
+  function ChatInput(props) {
+    _classCallCheck(this, ChatInput);
+
+    var _this = _possibleConstructorReturn(this, (ChatInput.__proto__ || Object.getPrototypeOf(ChatInput)).call(this, props));
+
+    _this.state = { message: '' };
+
+    _this.onInputChange = _this.onInputChange.bind(_this);
+    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(ChatInput, [{
+    key: 'onInputChange',
+    value: function onInputChange(event) {
+      this.setState({
+        message: event.target.value
+      });
+    }
+  }, {
+    key: 'onFormSubmit',
+    value: function onFormSubmit(event) {
+      event.preventDefault();
+      // this.props.saveUser(this.state.username);
+      console.log(this.state.message);
+      this.setState({
+        message: ''
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'chat-input-container' },
+        _react2.default.createElement(
+          'form',
+          { onSubmit: this.onFormSubmit },
+          _react2.default.createElement('input', {
+            type: 'text',
+            placeholder: 'Type a message...',
+            value: this.state.message,
+            onChange: this.onInputChange }),
+          _react2.default.createElement(
+            'button',
+            { type: 'submit' },
+            'Send'
+          )
+        )
+      );
+    }
+  }]);
+
+  return ChatInput;
+}(_react.Component);
 
 exports.default = ChatInput;
+
+
+ChatInput.propTypes = {};
 
 /***/ },
 /* 213 */
@@ -31125,6 +31180,7 @@ var Login = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
     _this.state = { username: '' };
+
     _this.onInputChange = _this.onInputChange.bind(_this);
     _this.onFormSubmit = _this.onFormSubmit.bind(_this);
     return _this;
@@ -31140,7 +31196,6 @@ var Login = function (_Component) {
   }, {
     key: 'onFormSubmit',
     value: function onFormSubmit(event) {
-      console.log('yoo');
       event.preventDefault();
       this.props.saveUser(this.state.username);
       this.setState({
@@ -31161,7 +31216,11 @@ var Login = function (_Component) {
             placeholder: 'Type your username...',
             value: this.state.username,
             onChange: this.onInputChange }),
-          _react2.default.createElement('button', { type: 'submit' })
+          _react2.default.createElement(
+            'button',
+            { type: 'submit' },
+            'Join the DoorDash Chat!'
+          )
         )
       );
     }
