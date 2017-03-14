@@ -18,7 +18,7 @@ class App extends Component {
     this.props.selectCurrentRoom(0);
     setInterval(() => {
       this.props.fetchMessages(this.props.currentRoom.id);
-    }, 5000);
+    }, 3000);
     setInterval(this.props.updateTimer, 60000);
   }
 
