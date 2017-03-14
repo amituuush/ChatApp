@@ -38,7 +38,6 @@ export const selectCurrentRoom = (roomId) => {
       .catch(err => {
         console.log(err);
       });
-    
      axios.get(`/api/rooms/${roomId}/messages`)
       .then(res => {
         dispatch({
@@ -52,6 +51,21 @@ export const selectCurrentRoom = (roomId) => {
   }
 }
 
+export const fetchMessages = (roomId) => {
+  return dispatch => {
+    axios.get(`/api/rooms/${roomId}/messages`)
+      .then(res => {
+        dispatch({
+          type: FETCH_MESSAGES,
+          payload: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+};
+
 export const saveUser = (name) => {
   localStorage.setItem('name', name);
 
@@ -63,6 +77,7 @@ export const saveUser = (name) => {
 
 export const logoutUser = () => {
   localStorage.removeItem('name');
+
   return {
     type: LOGOUT_USER,
     payload: ''
@@ -76,6 +91,10 @@ export const sendMessage = (roomId, message, name) => {
   };
 
   return dispatch => {
+    dispatch({
+      type: SEND_MESSAGE,
+      payload: messagePackage
+    })
     axios.post(`/api/rooms/${roomId}/messages`, messagePackage)
       .then(res => {
         dispatch({

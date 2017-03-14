@@ -16,8 +16,9 @@ class App extends Component {
     }
     this.props.fetchRooms();
     this.props.selectCurrentRoom(0);
-
-    setInterval(this.props.fetchRooms, 5000);
+    setInterval(() => {
+      this.props.fetchMessages(this.props.currentRoom.id);
+    }, 5000);
     setInterval(this.props.updateTimer, 60000);
   }
 
@@ -56,7 +57,8 @@ App.propTypes = {
   fetchRooms: React.PropTypes.func,
   selectCurrentRoom: React.PropTypes.func,
   sendMessage: React.PropTypes.func,
-  updateTimer: React.PropTypes.func
+  updateTimer: React.PropTypes.func,
+  fetchMessages: React.PropTypes.func
 };
 
 function mapStateToProps(state) {

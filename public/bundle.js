@@ -25729,14 +25729,17 @@
 	  _createClass(App, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      var _this2 = this;
+
 	      var nameExists = localStorage.getItem('name');
 	      if (nameExists) {
 	        this.props.saveUser(nameExists);
 	      }
 	      this.props.fetchRooms();
 	      this.props.selectCurrentRoom(0);
-
-	      setInterval(this.props.fetchRooms, 5000);
+	      setInterval(function () {
+	        _this2.props.fetchMessages(_this2.props.currentRoom.id);
+	      }, 5000);
 	      setInterval(this.props.updateTimer, 60000);
 	    }
 	  }, {
@@ -25778,7 +25781,8 @@
 	  fetchRooms: _react2.default.PropTypes.func,
 	  selectCurrentRoom: _react2.default.PropTypes.func,
 	  sendMessage: _react2.default.PropTypes.func,
-	  updateTimer: _react2.default.PropTypes.func
+	  updateTimer: _react2.default.PropTypes.func,
+	  fetchMessages: _react2.default.PropTypes.func
 	};
 
 	function mapStateToProps(state) {
@@ -25802,7 +25806,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.updateTimer = exports.sendMessage = exports.logoutUser = exports.saveUser = exports.selectCurrentRoom = exports.fetchRooms = undefined;
+	exports.updateTimer = exports.sendMessage = exports.logoutUser = exports.saveUser = exports.fetchMessages = exports.selectCurrentRoom = exports.fetchRooms = undefined;
 
 	var _axios = __webpack_require__(241);
 
@@ -25835,7 +25839,19 @@
 	    }).catch(function (err) {
 	      console.log(err);
 	    });
+	    _axios2.default.get('/api/rooms/' + roomId + '/messages').then(function (res) {
+	      dispatch({
+	        type: _types.FETCH_MESSAGES,
+	        payload: res.data
+	      });
+	    }).catch(function (err) {
+	      console.log(err);
+	    });
+	  };
+	};
 
+	var fetchMessages = exports.fetchMessages = function fetchMessages(roomId) {
+	  return function (dispatch) {
 	    _axios2.default.get('/api/rooms/' + roomId + '/messages').then(function (res) {
 	      dispatch({
 	        type: _types.FETCH_MESSAGES,
@@ -25858,6 +25874,7 @@
 
 	var logoutUser = exports.logoutUser = function logoutUser() {
 	  localStorage.removeItem('name');
+
 	  return {
 	    type: _types.LOGOUT_USER,
 	    payload: ''
@@ -25871,6 +25888,10 @@
 	  };
 
 	  return function (dispatch) {
+	    dispatch({
+	      type: _types.SEND_MESSAGE,
+	      payload: messagePackage
+	    });
 	    _axios2.default.post('/api/rooms/' + roomId + '/messages', messagePackage).then(function (res) {
 	      dispatch({
 	        type: _types.SEND_MESSAGE,
@@ -30339,7 +30360,7 @@
 	    ),
 	    _react2.default.createElement(
 	      'div',
-	      { onClick: props.logoutUser },
+	      { className: 'logout', onClick: props.logoutUser },
 	      'Logout'
 	    )
 	  );
@@ -30851,14 +30872,6 @@
 
 	  _createClass(ChatBox, [{
 	    key: 'render',
-
-
-	    // componentDidUpdate() {
-	    //   // ReactDOM.findDOMNode(this.refs.scrollbar).scrollBottom = 
-	    //   var node = this.getDOMNode();
-	    //   node.scrollTop = node.scrollHeight;
-	    // }
-
 	    value: function render() {
 	      var _this2 = this;
 

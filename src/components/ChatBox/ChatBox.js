@@ -5,12 +5,6 @@ import './chat-box.scss';
 
 export default class ChatBox extends Component {
 
-  // componentDidUpdate() {
-  //   // ReactDOM.findDOMNode(this.refs.scrollbar).scrollBottom = 
-  //   var node = this.getDOMNode();
-  //   node.scrollTop = node.scrollHeight;
-  // }
-
   render () {
     let messages = this.props.messages.map((message, i) => {
     return <Message

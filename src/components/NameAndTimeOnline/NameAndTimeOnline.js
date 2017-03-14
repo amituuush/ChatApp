@@ -14,7 +14,7 @@ const NameAndTimeOnline = props => {
     <div className="name-and-time-online-container">
       <h2>{props.name}</h2><div className="active-dot"></div>
       <p>Online for {props.timeOnline} {minutesText}</p>
-      <div onClick={props.logoutUser}>Logout</div>
+      <div className="logout" onClick={props.logoutUser}>Logout</div>
     </div>
   );
 }
