@@ -89,22 +89,23 @@ export const sendMessage = (roomId, message, name) => {
     name: name,
     message: message
   };
+  return dispatch => {
+    axios.post(`/api/rooms/${roomId}/messages`, messagePackage)
+      .then(res => {
+        dispatch({
+          type: SEND_MESSAGE,
+          payload: messagePackage
+        });
 
-  axios.post(`/api/rooms/${roomId}/messages`, messagePackage)
-    .then(res => {
-      dispatch({
-        type: SEND_MESSAGE,
-        payload: messagePackage
+        dispatch({
+          type: ADD_USER_TO_ROOM,
+          payload: name
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-
-      dispatch({
-        type: ADD_USER_TO_ROOM,
-        payload: name
-      });
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  }
 };
 
 export const updateTimer = () => {

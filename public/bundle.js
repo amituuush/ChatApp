@@ -25886,20 +25886,21 @@
 	    name: name,
 	    message: message
 	  };
+	  return function (dispatch) {
+	    _axios2.default.post('/api/rooms/' + roomId + '/messages', messagePackage).then(function (res) {
+	      dispatch({
+	        type: _types.SEND_MESSAGE,
+	        payload: messagePackage
+	      });
 
-	  _axios2.default.post('/api/rooms/' + roomId + '/messages', messagePackage).then(function (res) {
-	    dispatch({
-	      type: _types.SEND_MESSAGE,
-	      payload: messagePackage
+	      dispatch({
+	        type: _types.ADD_USER_TO_ROOM,
+	        payload: name
+	      });
+	    }).catch(function (err) {
+	      console.log(err);
 	    });
-
-	    dispatch({
-	      type: _types.ADD_USER_TO_ROOM,
-	      payload: name
-	    });
-	  }).catch(function (err) {
-	    console.log(err);
-	  });
+	  };
 	};
 
 	var updateTimer = exports.updateTimer = function updateTimer() {
