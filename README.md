@@ -5,16 +5,16 @@
 * Redux-thunk to handle async action creators in Redux
 * Live deployment on Heroku [here](http://bit.ly/2mUGCYs)
 
-##Live deployment 
+## Live deployment 
 Navigate to different browsers (ex. Chrome and Firefox) or navigate to a browser in incognito mode and in regular mode. Join the same chatroom and watch the app do it's thing!
 
 ## Installation and Dependencies
 This repo uses yarn as a package manager. [Yarn can be installed using homebrew.](https://yarnpkg.com/en/docs/install)
 
 1. Clone repo locally
-2. run `yarn install` to install all dependencies
-3. run `npm start`
-4. navigate to [http://localhost:8088/](http://localhost:8088/)
+2. Run `yarn install` to install all dependencies
+3. Run `npm start`
+4. Navigate to [http://localhost:8088/](http://localhost:8088/)
 
 ## Testing
 Use the command `npm test` to run the test suite.
