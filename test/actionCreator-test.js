@@ -24,7 +24,6 @@ describe('async actions', () => {
     ];
 
     const store = mockStore({ rooms: [] })
-    console.log('stuff', store.dispatch(actions.fetchRooms()));
     return store.dispatch(actions.fetchRooms())
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions)

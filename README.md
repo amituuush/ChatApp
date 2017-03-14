@@ -18,7 +18,7 @@ This repo uses yarn as a package manager. [Yarn can be installed using homebrew.
 
 ## Testing
 Use the command `npm test` to run the test suite.
-**Note: The async action creator test is still under development.
+**Note: The async action creator test is still under development. Working on getting this fixed ASAP.
 
 ## Other Considerations and Possible Improvements
 I built the app in React and Redux because I love the one way data flow of React and unit testing is simple. One could also argue that React is better for larger applications due to its innate ability to create reusable components and that a framework like Vue.js would be more appropriate. Given my love for React and the reasons stated above, I decided to go the React/Redux route.
