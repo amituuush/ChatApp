@@ -89,7 +89,7 @@ export const sendMessage = (roomId, message, name) => {
     name: name,
     message: message
   };
-  
+
   axios.post(`/api/rooms/${roomId}/messages`, messagePackage)
     .then(res => {
       dispatch({
@@ -105,7 +105,6 @@ export const sendMessage = (roomId, message, name) => {
     .catch(err => {
       console.log(err);
     });
-}
 };
 
 export const updateTimer = () => {
