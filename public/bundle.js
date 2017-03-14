@@ -25886,6 +25886,7 @@
 	    name: name,
 	    message: message
 	  };
+
 	  return function (dispatch) {
 	    _axios2.default.post('/api/rooms/' + roomId + '/messages', messagePackage).then(function (res) {
 	      dispatch({
@@ -30821,7 +30822,7 @@
 
 
 	// module
-	exports.push([module.id, ".chat-header-container {\n  width: calc(100% - 203px);\n  padding: 1.7em 0em;\n  box-shadow: 0px 1px 6px #C7C9CA;\n  background: #fff;\n  position: fixed;\n  top: 0;\n  z-index: 9999;\n  text-align: center; }\n  .chat-header-container .current-room {\n    color: #696969;\n    font-size: 1.4em;\n    padding-bottom: 0.4em; }\n  .chat-header-container .user {\n    color: #696969;\n    font-size: 0.9em; }\n  .chat-header-container .active-user {\n    color: #FF1940; }\n", ""]);
+	exports.push([module.id, ".chat-header-container {\n  width: calc(100% - 175px);\n  padding: 1.7em 0em;\n  box-shadow: 0px 1px 6px #C7C9CA;\n  background: #fff;\n  position: fixed;\n  top: 0;\n  z-index: 9999;\n  text-align: center; }\n  .chat-header-container .current-room {\n    color: #696969;\n    font-size: 1.4em;\n    padding-bottom: 0.4em; }\n  .chat-header-container .user {\n    color: #696969;\n    font-size: 0.9em; }\n  .chat-header-container .active-user {\n    color: #FF1940; }\n", ""]);
 
 	// exports
 
@@ -30841,6 +30842,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 
 	var _Message = __webpack_require__(295);
 
@@ -30866,6 +30871,20 @@
 	  }
 
 	  _createClass(ChatBox, [{
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate() {
+	      var node = _reactDom2.default.findDOMNode(this);
+	      this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (this.shouldScrollBottom) {
+	        var node = _reactDom2.default.findDOMNode(this);
+	        node.scrollTop = node.scrollHeight;
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -31162,7 +31181,7 @@
 
 
 	// module
-	exports.push([module.id, ".chat-input-wrap {\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  height: 2.5em;\n  background: #fff;\n  box-shadow: 0px 0px 6px #C7C9CA;\n  padding: 1.5em; }\n  .chat-input-wrap .chat-input-container input {\n    width: 60%;\n    max-width: 34em;\n    border-radius: 3px;\n    border: none;\n    box-shadow: inset 0px 0px 2px #95979b;\n    padding: 0.7em;\n    margin-bottom: 1em;\n    margin-right: 1em;\n    font-weight: 100;\n    border: 1px solid #fff; }\n    .chat-input-wrap .chat-input-container input:focus {\n      outline: none;\n      border: 1px solid #b6d2f3; }\n  .chat-input-wrap .chat-input-container button {\n    color: #4A90E2;\n    background: #fff;\n    border: none; }\n    .chat-input-wrap .chat-input-container button:hover {\n      cursor: pointer; }\n    .chat-input-wrap .chat-input-container button:focus {\n      outline: none; }\n", ""]);
+	exports.push([module.id, ".chat-input-wrap {\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  height: 2.5em;\n  background: #fff;\n  box-shadow: 0px 0px 6px #C7C9CA;\n  padding: 1.5em; }\n  .chat-input-wrap .chat-input-container input {\n    width: 40%;\n    max-width: 34em;\n    border-radius: 3px;\n    border: none;\n    box-shadow: inset 0px 0px 2px #95979b;\n    padding: 0.7em;\n    margin-bottom: 1em;\n    margin-right: 1em;\n    font-weight: 100;\n    border: 1px solid #fff; }\n    .chat-input-wrap .chat-input-container input:focus {\n      outline: none;\n      border: 1px solid #b6d2f3; }\n  .chat-input-wrap .chat-input-container button {\n    color: #4A90E2;\n    background: #fff;\n    border: none; }\n    .chat-input-wrap .chat-input-container button:hover {\n      cursor: pointer; }\n    .chat-input-wrap .chat-input-container button:focus {\n      outline: none; }\n", ""]);
 
 	// exports
 

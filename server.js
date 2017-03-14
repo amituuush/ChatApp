@@ -36,10 +36,10 @@ router.use(function(req, res, next) {
 const database = [
   { name: 'Analytics', id: 0, users: ['Ryan','Nick'], messages: [{name: 'Ryan', message: 'ayyyyy'},{name: 'Nick', message: 'lmao'}]},
   { name: 'Business', id: 1, users: ['Abdul'], messages: [{name: 'Abdul', message: 'ayy'}]},
-  { name: 'Design', id: 3, users: ['Abdul'], messages: [{name: 'Abdul', message: 'ayy'}]},
-  { name: 'Engineering', id: 4, users: ['Abdul'], messages: [{name: 'Abdul', message: 'ayy'}]},
-  { name: 'HR', id: 5, users: ['Abdul'], messages: [{name: 'Abdul', message: 'ayy'}]},
-  { name: 'Operations', id: 6, users: ['Abdul'], messages: [{name: 'Abdul', message: 'ayy'}]}
+  { name: 'Design', id: 3, users: ['Jake'], messages: [{name: 'Jake', message: 'yo'}]},
+  { name: 'Engineering', id: 4, users: ['Mark'], messages: [{name: 'Mark', message: 'whatup'}]},
+  { name: 'HR', id: 5, users: ['Justin'], messages: [{name: 'Justin', message: 'heyoo'}]},
+  { name: 'Operations', id: 6, users: ['Jay'], messages: [{name: 'Jay', message: 'sup'}]}
 ]
 
 

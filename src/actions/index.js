@@ -89,6 +89,7 @@ export const sendMessage = (roomId, message, name) => {
     name: name,
     message: message
   };
+  
   return dispatch => {
     axios.post(`/api/rooms/${roomId}/messages`, messagePackage)
       .then(res => {
