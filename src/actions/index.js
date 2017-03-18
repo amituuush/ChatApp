@@ -53,9 +53,9 @@ export const selectCurrentRoom = (roomId) => {
 
 export const fetchMessages = (roomId) => {
   return dispatch => {
-    axios.get(`/api/rooms/${roomId}/messages`)
+    return axios.get(`/api/rooms/${roomId}/messages`)
       .then(res => {
-        dispatch({
+        return dispatch({
           type: FETCH_MESSAGES,
           payload: res.data
         });

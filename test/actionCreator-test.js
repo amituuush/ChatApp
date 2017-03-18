@@ -12,15 +12,15 @@ const host = 'http://localhost';
 axios.defaults.host = host;
 axios.defaults.adapter = httpAdapter;
 
-const middlewares = [ thunk ]
-const mockStore = configureMockStore(middlewares)
+const middlewares = [ thunk ];
+const mockStore = configureMockStore(middlewares);
 
 describe('async actions', () => {
   afterEach(() => {
     nock.cleanAll();
   })
 
-  it('dispatches FETCH_ROOMS when room data is retrieved', () => {
+  it('fetchRooms returns an array of rooms as objects', () => {
     nock(host)
       .get('/api/rooms')
       .reply(200, [{ "name": "Analytics", "id": 0}])
@@ -34,5 +34,21 @@ describe('async actions', () => {
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions)
       })
-  })
+  });
+
+  it('fetchMessages returns an array of messages as objects', () => {
+    nock(host)
+      .get('/api/rooms/0/messages')
+      .reply(200, [{ "name": "Jack", "message": "hey"}])
+
+    const expectedActions = [
+      { type: types.FETCH_MESSAGES, payload: [{ "name": "Jack", "message": "hey"},] }
+    ];
+
+    const store = mockStore({ messages: [] })
+    return store.dispatch(actions.fetchMessages(0))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions)
+      })
+  });
 })
