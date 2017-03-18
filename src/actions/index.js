@@ -13,9 +13,9 @@ import {
 
 export const fetchRooms = () => {
   return dispatch => {
-    axios.get('/api/rooms')
+    return axios.get('/api/rooms')
       .then(res => {
-        dispatch({
+        return dispatch({
           type: FETCH_ROOMS,
           payload: res.data
         });
