@@ -18,7 +18,7 @@ const mockStore = configureMockStore(middlewares);
 describe('async actions', () => {
   afterEach(() => {
     nock.cleanAll();
-  })
+  });
 
   it('fetchRooms returns an array of rooms as objects', () => {
     nock(host)
@@ -29,7 +29,7 @@ describe('async actions', () => {
       { type: types.FETCH_ROOMS, payload: [{ "name": "Analytics", "id": 0},] }
     ];
 
-    const store = mockStore({ rooms: [] })
+    const store = mockStore({ rooms: [] });
     return store.dispatch(actions.fetchRooms())
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions)
@@ -51,4 +51,13 @@ describe('async actions', () => {
         expect(store.getActions()).toEqual(expectedActions)
       })
   });
+
+  it('updateTimer should return an action with type: UPDATE_TIMER', () => {
+    const expectedAction = {
+      type: types.UPDATE_TIMER,
+    };
+    console.log('this', actions.updateTimer());
+    expect(actions.updateTimer()).toEqual(expectedAction);
+  });  
+
 })
