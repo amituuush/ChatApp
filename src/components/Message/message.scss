@@ -2,6 +2,15 @@
   max-width: 50%;
   clear: both;
   float: left;
+  margin-top: 1.1em;
+
+  .avatar-message {
+
+
+  img {
+    width: 32px;
+    margin-right: 0.2em;
+  }
 
   .message-bubble {
     background: #fff;
@@ -9,14 +18,18 @@
     border-radius: 20px;
     font-size: 0.8em;
     margin-bottom: 0.4em;
-    margin-top: 1.1em;
     line-height: 1.5em;
+    display: inline-block;
+    vertical-align: top;
   }
 
   .red {
     background: #FF1940;
     color: #fff;
   }
+  }
+
+ 
 
   .message-name {
     font-size: 0.8em;

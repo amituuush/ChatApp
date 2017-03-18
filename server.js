@@ -34,13 +34,13 @@ router.use(function(req, res, next) {
 
 // Simple in memory 'database'
 const database = [
-  { name: 'Analytics', id: 0, users: ['Ryan','Nick'], messages: [{name: 'Ryan', message: 'ayyyyy'},{name: 'Nick', message: 'lmao'}]},
-  { name: 'Business', id: 1, users: ['Abdul'], messages: [{name: 'Abdul', message: 'ayy'}]},
-  { name: 'Design', id: 3, users: ['Jake'], messages: [{name: 'Jake', message: 'yo'}]},
-  { name: 'Engineering', id: 4, users: ['Mark'], messages: [{name: 'Mark', message: 'whatup'}]},
-  { name: 'HR', id: 5, users: ['Justin'], messages: [{name: 'Justin', message: 'heyoo'}]},
-  { name: 'Operations', id: 6, users: ['Jay'], messages: [{name: 'Jay', message: 'sup'}]}
-]
+  { name: 'Analytics', id: 0, users: ['Ryan','Nick'], messages: [{name: 'Ryan', message: 'ayyyyy', avatarUrl: './img/pig.png'},{name: 'Nick', message: 'lmao', avatarUrl: './img/cat.png'}]},
+  { name: 'Business', id: 1, users: ['Abdul'], messages: [{name: 'Abdul', message: 'ayy', avatarUrl: './img/dolphin.png'}]},
+  { name: 'Design', id: 3, users: ['Jake'], messages: [{name: 'Jake', message: 'yo', avatarUrl: './img/octopus.png'}]},
+  { name: 'Engineering', id: 4, users: ['Mark'], messages: [{name: 'Mark', message: 'whatup', avatarUrl: './img/pig.png'}]},
+  { name: 'HR', id: 5, users: ['Justin'], messages: [{name: 'Justin', message: 'heyoo', avatarUrl: './img/horse.png'}]},
+  { name: 'Operations', id: 6, users: ['Jay'], messages: [{name: 'Jay', message: 'sup', avatarUrl: './img/snake.png'}]}
+];
 
 
 // Utility functions

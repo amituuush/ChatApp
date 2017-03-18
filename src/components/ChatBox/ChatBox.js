@@ -24,6 +24,7 @@ export default class ChatBox extends Component {
             message={message.message}
             messageName={message.name}
             name={this.props.name}
+            avatarUrl={message.avatarUrl}
             key={i} />
     });
 

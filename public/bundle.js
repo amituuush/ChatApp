@@ -29426,6 +29426,7 @@
 	          message: message.message,
 	          messageName: message.name,
 	          name: _this2.props.name,
+	          avatarUrl: message.avatarUrl,
 	          key: i });
 	      });
 
@@ -29477,8 +29478,13 @@
 	    { className: isCurrentUser ? "message-container right" : "message-container" },
 	    _react2.default.createElement(
 	      'div',
-	      { className: isCurrentUser ? "message-bubble red" : "message-bubble" },
-	      props.message
+	      { className: 'avatar-message' },
+	      _react2.default.createElement('img', { src: props.avatarUrl, alt: '' }),
+	      _react2.default.createElement(
+	        'div',
+	        { className: isCurrentUser ? "message-bubble red" : "message-bubble" },
+	        props.message
+	      )
 	    ),
 	    _react2.default.createElement(
 	      'div',
@@ -29492,6 +29498,7 @@
 	  message: _react2.default.PropTypes.string,
 	  messageName: _react2.default.PropTypes.string,
 	  name: _react2.default.PropTypes.string,
+	  avatarUrl: _react2.default.PropTypes.string,
 	  currentRoom: _react2.default.PropTypes.object
 	};
 
@@ -29532,7 +29539,7 @@
 
 
 	// module
-	exports.push([module.id, ".message-container {\n  max-width: 50%;\n  clear: both;\n  float: left; }\n  .message-container .message-bubble {\n    background: #fff;\n    padding: 0.5em 0.9em 0.5em 0.9em;\n    border-radius: 20px;\n    font-size: 0.8em;\n    margin-bottom: 0.4em;\n    margin-top: 1.1em;\n    line-height: 1.5em; }\n  .message-container .red {\n    background: #FF1940;\n    color: #fff; }\n  .message-container .message-name {\n    font-size: 0.8em;\n    color: #666666; }\n  .message-container .hide {\n    display: none; }\n\n.right {\n  float: right; }\n", ""]);
+	exports.push([module.id, ".message-container {\n  max-width: 50%;\n  clear: both;\n  float: left;\n  margin-top: 1.1em; }\n  .message-container .avatar-message img {\n    width: 32px;\n    margin-right: 0.2em; }\n  .message-container .avatar-message .message-bubble {\n    background: #fff;\n    padding: 0.5em 0.9em 0.5em 0.9em;\n    border-radius: 20px;\n    font-size: 0.8em;\n    margin-bottom: 0.4em;\n    line-height: 1.5em;\n    display: inline-block;\n    vertical-align: top; }\n  .message-container .avatar-message .red {\n    background: #FF1940;\n    color: #fff; }\n  .message-container .message-name {\n    font-size: 0.8em;\n    color: #666666; }\n  .message-container .hide {\n    display: none; }\n\n.right {\n  float: right; }\n", ""]);
 
 	// exports
 
