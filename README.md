@@ -18,7 +18,7 @@ This repo uses yarn as a package manager. [Yarn can be installed using homebrew.
 
 ## Testing
 Use the command `npm test` to run the test suite.
-**Note: The async action creator test is still under development. Working on getting this fixed ASAP.
+~~**Note: The async action creator test is still under development. Working on getting this fixed ASAP.~~ Fixed :)
 
 ## Other Considerations and Possible Improvements
 I built the app in React and Redux because I love the one way data flow of React and unit testing is simple. One could also argue that React is better for larger applications due to its innate ability to create reusable components and that a framework like Vue.js would be more appropriate. Given my love for React and the reasons stated above, I decided to go the React/Redux route.
@@ -37,7 +37,7 @@ Another enhancement that could be made to my action creators is to dispatch an a
 
 **Auth**: Due to a time constraint, I decided to create a make-shift auth feature on the app. It's quite simple: when a user enters their name in the initial screen, I save that name to the state. Then depending on this piece of state, I either render the `<Login />` component, or the chat app component. I also save the username to local storage, so that a user doesn't have to "log in" again after refreshing the page. A logout button is there if a user wants to change their username or simply log out of the app.
 
-**Testing**: Again, due to a time constraint, I didn't get to test everything I would in a production level app. Therefore, I created tests for a component rendering, a reducer, and an async action creator. The async action creator test is still not functioning, as I'm currently working on getting that fixed.
+**Testing**: Again, due to a time constraint, I didn't get to test everything I would in a production level app. Therefore, I created tests for a component rendering, a reducer, and an async action creator. ~~The async action creator test is still not functioning, as I'm currently working on getting that fixed.~~ Fixed :)
 
 **Other improvements**:
 * Ability to create a new chatroom
