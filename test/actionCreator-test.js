@@ -56,7 +56,7 @@ describe('async actions', () => {
     const expectedAction = {
       type: types.UPDATE_TIMER,
     };
-    console.log('this', actions.updateTimer());
+
     expect(actions.updateTimer()).toEqual(expectedAction);
   });  
 
