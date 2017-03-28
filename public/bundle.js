@@ -25537,7 +25537,7 @@
 	  rooms: _rooms_reducer2.default,
 	  currentRoom: _current_room_reducer2.default,
 	  messages: _messages_reducer2.default,
-	  name: _save_user_reducer2.default,
+	  user: _save_user_reducer2.default,
 	  timeOnline: _update_time_reducer2.default
 	});
 
@@ -25653,7 +25653,7 @@
 	});
 
 	exports.default = function () {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	  var action = arguments[1];
 
 	  switch (action.type) {
@@ -25666,6 +25666,11 @@
 	};
 
 	var _types = __webpack_require__(233);
+
+	var initialState = {
+	  name: '',
+	  avatarUrl: ''
+	};
 
 /***/ },
 /* 237 */
@@ -25769,22 +25774,22 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'app-container' },
-	        !this.props.name ? _react2.default.createElement(_Login2.default, null) : _react2.default.createElement(
+	        !this.props.user.name ? _react2.default.createElement(_Login2.default, null) : _react2.default.createElement(
 	          'div',
 	          { className: 'app-container' },
 	          _react2.default.createElement(_LeftPanel2.default, {
 	            rooms: this.props.rooms,
 	            selectCurrentRoom: this.props.selectCurrentRoom,
-	            name: this.props.name,
+	            user: this.props.user,
 	            currentRoom: this.props.currentRoom,
 	            timeOnline: this.props.timeOnline,
 	            logoutUser: this.props.logoutUser }),
 	          _react2.default.createElement(_RightPanel2.default, _defineProperty({
 	            currentRoom: this.props.currentRoom,
 	            messages: this.props.messages,
-	            name: this.props.name,
+	            user: this.props.user,
 	            sendMessage: this.props.sendMessage
-	          }, 'name', this.props.name))
+	          }, 'user', this.props.user))
 	        )
 	      );
 	    }
@@ -25797,7 +25802,7 @@
 	  rooms: _react2.default.PropTypes.array,
 	  currentRoom: _react2.default.PropTypes.object,
 	  messages: _react2.default.PropTypes.array,
-	  name: _react2.default.PropTypes.string,
+	  user: _react2.default.PropTypes.object,
 	  timeOnline: _react2.default.PropTypes.number,
 	  fetchRooms: _react2.default.PropTypes.func,
 	  selectCurrentRoom: _react2.default.PropTypes.func,
@@ -25811,7 +25816,7 @@
 	    rooms: state.rooms,
 	    currentRoom: state.currentRoom,
 	    messages: state.messages,
-	    name: state.name,
+	    user: state.user,
 	    timeOnline: state.timeOnline
 	  };
 	}
@@ -25884,17 +25889,22 @@
 	  };
 	};
 
-	var saveUser = exports.saveUser = function saveUser(name) {
+	var saveUser = exports.saveUser = function saveUser(name, avatarUrl) {
 	  localStorage.setItem('name', name);
+	  localStorage.setItem('avatarUrl', avatarUrl);
 
 	  return {
 	    type: _types.SAVE_USER,
-	    payload: name
+	    payload: {
+	      name: name,
+	      avatarUrl: avatarUrl
+	    }
 	  };
 	};
 
 	var logoutUser = exports.logoutUser = function logoutUser() {
 	  localStorage.removeItem('name');
+	  localStorage.removeItem('avatarUrl');
 
 	  return {
 	    type: _types.LOGOUT_USER,
@@ -25973,9 +25983,13 @@
 
 	    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
-	    _this.state = { username: '' };
+	    _this.state = {
+	      username: '',
+	      avatarUrl: ''
+	    };
 
 	    _this.onInputChange = _this.onInputChange.bind(_this);
+	    _this.onAvatarChange = _this.onAvatarChange.bind(_this);
 	    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
 	    return _this;
 	  }
@@ -25988,13 +26002,25 @@
 	      });
 	    }
 	  }, {
+	    key: 'onAvatarChange',
+	    value: function onAvatarChange(event) {
+	      this.setState({
+	        avatarUrl: event.target.alt
+	      });
+	    }
+	  }, {
 	    key: 'onFormSubmit',
 	    value: function onFormSubmit(event) {
 	      event.preventDefault();
-	      this.props.saveUser(this.state.username);
-	      this.setState({
-	        username: ''
-	      });
+	      if (this.state.username && this.state.avatarUrl) {
+	        this.props.saveUser(this.state.username, this.state.avatarUrl);
+	        this.setState({
+	          username: '',
+	          avatarUrl: ''
+	        });
+	      } else {
+	        alert('You must enter a username and select an avatar to continue!');
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -26013,6 +26039,64 @@
 	              placeholder: 'Type your username...',
 	              value: this.state.username,
 	              onChange: this.onInputChange }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'avatar-wrap' },
+	              _react2.default.createElement(
+	                'div',
+	                { onClick: this.onAvatarChange, className: 'avatar-container' },
+	                _react2.default.createElement('img', { src: './img/dog.png', alt: './img/dog.png' })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { onClick: this.onAvatarChange, className: 'avatar-container' },
+	                _react2.default.createElement('img', { src: './img/panda.png', alt: './img/panda.png' })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { onClick: this.onAvatarChange, className: 'avatar-container' },
+	                _react2.default.createElement('img', { src: './img/snake.png', alt: './img/snake.png' })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { onClick: this.onAvatarChange, className: 'avatar-container' },
+	                _react2.default.createElement('img', { src: './img/turtle.png', alt: './img/turtle.png' })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { onClick: this.onAvatarChange, className: 'avatar-container' },
+	                _react2.default.createElement('img', { src: './img/elephant.png', alt: './img/elephant.png' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'avatar-wrap' },
+	              _react2.default.createElement(
+	                'div',
+	                { onClick: this.onAvatarChange, className: 'avatar-container' },
+	                _react2.default.createElement('img', { src: './img/fish.png', alt: './img/fish.png' })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { onClick: this.onAvatarChange, className: 'avatar-container' },
+	                _react2.default.createElement('img', { src: './img/koala.png', alt: './img/koala.png' })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { onClick: this.onAvatarChange, className: 'avatar-container' },
+	                _react2.default.createElement('img', { src: './img/lion.png', alt: './img/lion.png' })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { onClick: this.onAvatarChange, className: 'avatar-container' },
+	                _react2.default.createElement('img', { src: './img/monkey.png', alt: './img/monkey.png' })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { onClick: this.onAvatarChange, className: 'avatar-container' },
+	                _react2.default.createElement('img', { src: './img/octopus.png', alt: './img/octopus.png' })
+	              )
+	            ),
 	            _react2.default.createElement(
 	              'button',
 	              { type: 'submit' },
@@ -26068,7 +26152,7 @@
 
 
 	// module
-	exports.push([module.id, ".login-wrap {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  text-align: center; }\n  .login-wrap .login-container {\n    text-align: center;\n    width: 20em;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    margin: -7em 0 0 -10em; }\n    .login-wrap .login-container input {\n      display: block;\n      width: 100%;\n      border-radius: 3px;\n      border: none;\n      box-shadow: inset 0px 0px 2px #95979b;\n      padding: 0.7em;\n      margin-bottom: 1em;\n      font-weight: 100;\n      border: 1px solid #fff; }\n      .login-wrap .login-container input:focus {\n        outline: none;\n        border: 1px solid #b6d2f3; }\n    .login-wrap .login-container button {\n      display: block;\n      width: 21.4em;\n      background: #FF1940;\n      border: none;\n      border-radius: 3px;\n      color: #fff;\n      padding: 0.7em; }\n      .login-wrap .login-container button:hover {\n        cursor: pointer; }\n      .login-wrap .login-container button:focus {\n        outline: none; }\n", ""]);
+	exports.push([module.id, ".login-wrap {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  text-align: center; }\n  .login-wrap .login-container {\n    text-align: center;\n    width: 20em;\n    margin: 0 auto;\n    margin-top: 10em; }\n    .login-wrap .login-container input {\n      display: block;\n      width: 100%;\n      border-radius: 3px;\n      border: none;\n      box-shadow: inset 0px 0px 2px #95979b;\n      padding: 0.7em;\n      margin-bottom: 1em;\n      font-weight: 100;\n      border: 1px solid #fff; }\n      .login-wrap .login-container input:focus {\n        outline: none;\n        border: 1px solid #b6d2f3; }\n    .login-wrap .login-container .avatar-wrap {\n      margin: 0.5em 0em; }\n      .login-wrap .login-container .avatar-wrap .avatar-container {\n        width: 50px;\n        height: 50px;\n        display: inline-block;\n        vertical-align: bottom;\n        margin: 0em 0.25em 0em 0.25em; }\n        .login-wrap .login-container .avatar-wrap .avatar-container img {\n          width: 50px;\n          display: inline-block;\n          padding: 0.25em;\n          margin: 0 0.25em 0 0.25em; }\n          .login-wrap .login-container .avatar-wrap .avatar-container img:hover {\n            background: #EFF1F2;\n            cursor: pointer; }\n    .login-wrap .login-container button {\n      display: block;\n      width: 21.4em;\n      background: #FF1940;\n      border: none;\n      border-radius: 3px;\n      color: #fff;\n      padding: 0.7em;\n      margin-top: 2em; }\n      .login-wrap .login-container button:hover {\n        cursor: pointer; }\n      .login-wrap .login-container button:focus {\n        outline: none; }\n", ""]);
 
 	// exports
 
@@ -28825,7 +28909,7 @@
 	    'div',
 	    { className: 'left-panel-container' },
 	    _react2.default.createElement(_NameAndTimeOnline2.default, {
-	      name: props.name,
+	      user: props.user,
 	      timeOnline: props.timeOnline,
 	      logoutUser: props.logoutUser }),
 	    _react2.default.createElement(_ChatRoomContainer2.default, {
@@ -28837,7 +28921,7 @@
 
 	LeftPanel.propTypes = {
 	  rooms: _react2.default.PropTypes.array,
-	  name: _react2.default.PropTypes.string,
+	  user: _react2.default.PropTypes.object,
 	  selectCurrentRoom: _react2.default.PropTypes.func
 	};
 
@@ -28875,7 +28959,7 @@
 	    _react2.default.createElement(
 	      'h2',
 	      null,
-	      props.name
+	      props.user.name
 	    ),
 	    _react2.default.createElement('div', { className: 'active-dot' }),
 	    _react2.default.createElement(
@@ -28895,7 +28979,7 @@
 	};
 
 	NameAndTimeOnline.propTypes = {
-	  name: _react2.default.PropTypes.string
+	  user: _react2.default.PropTypes.object
 	};
 
 	exports.default = NameAndTimeOnline;
@@ -29209,14 +29293,14 @@
 	    { className: 'right-panel-container' },
 	    _react2.default.createElement(_ChatHeader2.default, {
 	      currentRoom: props.currentRoom,
-	      name: props.name }),
+	      user: props.user }),
 	    _react2.default.createElement(_ChatBox2.default, {
 	      messages: props.messages,
 	      currentRoom: props.currentRoom,
-	      name: props.name }),
+	      user: props.user }),
 	    _react2.default.createElement(_ChatInput2.default, {
 	      currentRoom: props.currentRoom,
-	      name: props.name,
+	      user: props.user,
 	      sendMessage: props.sendMessage })
 	  );
 	};
@@ -29224,7 +29308,7 @@
 	RightPanel.propTypes = {
 	  currentRoom: _react2.default.PropTypes.object,
 	  messages: _react2.default.PropTypes.array,
-	  name: _react2.default.PropTypes.string,
+	  user: _react2.default.PropTypes.object,
 	  sendMessage: _react2.default.PropTypes.func
 	};
 
@@ -29270,7 +29354,7 @@
 	    value: function render() {
 	      var users = void 0;
 	      var currentRoomUsers = this.props.currentRoom.users;
-	      var currentUser = this.props.name;
+	      var currentUser = this.props.user.name;
 	      if (currentRoomUsers === undefined) {
 	        users = _react2.default.createElement(
 	          'p',
@@ -29316,7 +29400,7 @@
 
 	ChatHeader.propTypes = {
 	  currentRoom: _react2.default.PropTypes.object,
-	  name: _react2.default.PropTypes.string
+	  user: _react2.default.PropTypes.object
 	};
 
 /***/ },
@@ -29425,8 +29509,9 @@
 	        return _react2.default.createElement(_Message2.default, {
 	          message: message.message,
 	          messageName: message.name,
-	          name: _this2.props.name,
-	          avatarUrl: message.avatarUrl,
+	          name: _this2.props.user.name,
+	          avatarUrl: _this2.props.user.avatarUrl,
+	          messageAvatarUrl: message.avatarUrl,
 	          key: i });
 	      });
 
@@ -29446,7 +29531,7 @@
 
 	ChatBox.propTypes = {
 	  messages: _react2.default.PropTypes.array,
-	  name: _react2.default.PropTypes.string
+	  user: _react2.default.PropTypes.object
 	};
 
 /***/ },
@@ -29479,7 +29564,7 @@
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'avatar-message' },
-	      _react2.default.createElement('img', { src: props.avatarUrl, alt: '' }),
+	      _react2.default.createElement('img', { src: props.messageAvatarUrl, alt: '' }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: isCurrentUser ? "message-bubble red" : "message-bubble" },
@@ -29498,6 +29583,7 @@
 	  message: _react2.default.PropTypes.string,
 	  messageName: _react2.default.PropTypes.string,
 	  name: _react2.default.PropTypes.string,
+	  messageAvatarUrl: _react2.default.PropTypes.string,
 	  avatarUrl: _react2.default.PropTypes.string,
 	  currentRoom: _react2.default.PropTypes.object
 	};
@@ -29639,7 +29725,7 @@
 	      if (!this.state.message) {
 	        alert('Enter in a message');
 	      } else {
-	        this.props.sendMessage(this.props.currentRoom.id, this.state.message, this.props.name);
+	        this.props.sendMessage(this.props.currentRoom.id, this.state.message, this.props.user.name);
 	        this.setState({
 	          message: ''
 	        });
@@ -29681,7 +29767,7 @@
 
 	ChatInput.propTypes = {
 	  currentRoom: _react2.default.PropTypes.object,
-	  name: _react2.default.PropTypes.string,
+	  user: _react2.default.PropTypes.object,
 	  sendMessage: _react2.default.PropTypes.func
 	};
 

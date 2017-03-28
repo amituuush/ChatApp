@@ -9,6 +9,6 @@ export const rootReducer = combineReducers({
   rooms: roomsReducer,
   currentRoom: currentRoomReducer,
   messages: messagesReducer,
-  name: saveUserReducer,
+  user: saveUserReducer,
   timeOnline: updateTimeReducer
 });

@@ -31,6 +31,6 @@ module.exports = {
         ]
       },
     resolve: {
-    extensions: ["", ".js", ".jsx", ".es6"] // allow you to not include file type when requiring
+    extensions: ["", ".js", ".jsx", ".es6"]
     }
 };

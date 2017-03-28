@@ -10,14 +10,14 @@ const RightPanel = props => {
     <div className="right-panel-container">
       <ChatHeader 
         currentRoom={props.currentRoom}
-        name={props.name} />
+        user={props.user} />
       <ChatBox 
         messages={props.messages}
         currentRoom={props.currentRoom}
-        name={props.name} />
+        user={props.user} />
       <ChatInput 
         currentRoom={props.currentRoom}
-        name={props.name}
+        user={props.user}
         sendMessage={props.sendMessage} />
     </div>
   );
@@ -26,7 +26,7 @@ const RightPanel = props => {
 RightPanel.propTypes = {
   currentRoom: React.PropTypes.object,
   messages: React.PropTypes.array,
-  name: React.PropTypes.string,
+  user: React.PropTypes.object,
   sendMessage: React.PropTypes.func
 };
 

@@ -12,7 +12,7 @@ const NameAndTimeOnline = props => {
 
   return (
     <div className="name-and-time-online-container">
-      <h2>{props.name}</h2><div className="active-dot"></div>
+      <h2>{props.user.name}</h2><div className="active-dot"></div>
       <p>Online for {props.timeOnline} {minutesText}</p>
       <div className="logout" onClick={props.logoutUser}>Logout</div>
     </div>
@@ -20,7 +20,7 @@ const NameAndTimeOnline = props => {
 }
 
 NameAndTimeOnline.propTypes = {
-  name: React.PropTypes.string
+  user: React.PropTypes.object
 };
 
 export default NameAndTimeOnline;

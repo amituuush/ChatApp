@@ -25,22 +25,22 @@ class App extends Component {
   render() {
     return (
         <div className="app-container">
-        {!this.props.name ? 
+        {!this.props.user.name ? 
           <Login /> :
           <div className="app-container">
             <LeftPanel 
               rooms={this.props.rooms}
               selectCurrentRoom={this.props.selectCurrentRoom}
-              name={this.props.name}
+              user={this.props.user}
               currentRoom={this.props.currentRoom}
               timeOnline={this.props.timeOnline}
               logoutUser={this.props.logoutUser} />
             <RightPanel 
               currentRoom={this.props.currentRoom}
               messages={this.props.messages}
-              name={this.props.name}
+              user={this.props.user}
               sendMessage={this.props.sendMessage}
-              name={this.props.name} />
+              user={this.props.user} />
           </div>
         }
         </div>
@@ -52,7 +52,7 @@ App.propTypes = {
   rooms: React.PropTypes.array,
   currentRoom: React.PropTypes.object,
   messages: React.PropTypes.array,
-  name: React.PropTypes.string,
+  user: React.PropTypes.object,
   timeOnline: React.PropTypes.number,
   fetchRooms: React.PropTypes.func,
   selectCurrentRoom: React.PropTypes.func,
@@ -66,7 +66,7 @@ function mapStateToProps(state) {
     rooms: state.rooms,
     currentRoom: state.currentRoom,
     messages: state.messages,
-    name: state.name,
+    user: state.user,
     timeOnline: state.timeOnline
   }
 }

@@ -6,11 +6,14 @@
 
   .login-container {
     text-align: center;
+    // width: 20em;
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // margin: -7em 0 0 -10em;
     width: 20em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -7em 0 0 -10em;
+    margin: 0 auto;
+    margin-top: 10em;
 
     input {
       display: block;
@@ -29,6 +32,31 @@
       }
     }
 
+    .avatar-wrap {
+      margin: 0.5em 0em;
+
+      .avatar-container {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        vertical-align: bottom;
+        margin: 0em 0.25em 0em 0.25em;
+
+        img {
+          width: 50px;
+          display: inline-block;
+          padding: 0.25em;
+          margin: 0 0.25em 0 0.25em;
+
+          &:hover {
+            background: #EFF1F2;
+            cursor: pointer;
+          }
+        }
+      }
+
+    }
+
     button {
       display: block;
       width: 21.4em;
@@ -37,6 +65,7 @@
       border-radius: 3px;
       color: #fff;
       padding: 0.7em;
+      margin-top: 2em;
 
       &:hover {
         cursor: pointer;

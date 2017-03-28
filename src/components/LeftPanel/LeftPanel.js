@@ -8,7 +8,7 @@ const LeftPanel = props => {
   return (
     <div className="left-panel-container">
       <NameAndTimeOnline 
-        name={props.name}
+        user={props.user}
         timeOnline={props.timeOnline}
         logoutUser={props.logoutUser} />
       <ChatRoomContainer 
@@ -21,7 +21,7 @@ const LeftPanel = props => {
 
 LeftPanel.propTypes = {
   rooms: React.PropTypes.array,
-  name: React.PropTypes.string,
+  user: React.PropTypes.object,
   selectCurrentRoom: React.PropTypes.func
 };
 

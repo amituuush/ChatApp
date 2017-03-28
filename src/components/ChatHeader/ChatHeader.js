@@ -7,7 +7,7 @@ export default class ChatHeader extends Component {
   render () {
     let users;
     const currentRoomUsers = this.props.currentRoom.users;
-    const currentUser = this.props.name;
+    const currentUser = this.props.user.name;
      if (currentRoomUsers === undefined) {
       users = <p>Loading...</p>;
     } else if (currentRoomUsers) {
@@ -30,5 +30,5 @@ export default class ChatHeader extends Component {
 
 ChatHeader.propTypes = {
   currentRoom: React.PropTypes.object,
-  name: React.PropTypes.string
+  user: React.PropTypes.object
 };

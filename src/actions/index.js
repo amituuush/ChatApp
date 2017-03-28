@@ -66,17 +66,22 @@ export const fetchMessages = (roomId) => {
   }
 };
 
-export const saveUser = (name) => {
+export const saveUser = (name, avatarUrl) => {
   localStorage.setItem('name', name);
+  localStorage.setItem('avatarUrl', avatarUrl);
 
   return {
     type: SAVE_USER,
-    payload: name
+    payload: {
+      name: name,
+      avatarUrl: avatarUrl
+    }
   }
 };
 
 export const logoutUser = () => {
   localStorage.removeItem('name');
+  localStorage.removeItem('avatarUrl');
 
   return {
     type: LOGOUT_USER,

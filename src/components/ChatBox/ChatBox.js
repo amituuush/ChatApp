@@ -23,8 +23,9 @@ export default class ChatBox extends Component {
     return <Message
             message={message.message}
             messageName={message.name}
-            name={this.props.name}
-            avatarUrl={message.avatarUrl}
+            name={this.props.user.name}
+            avatarUrl={this.props.user.avatarUrl}
+            messageAvatarUrl={message.avatarUrl}
             key={i} />
     });
 
@@ -38,5 +39,5 @@ export default class ChatBox extends Component {
 
 ChatBox.propTypes = {
   messages: React.PropTypes.array,
-  name: React.PropTypes.string
+  user: React.PropTypes.object
 };

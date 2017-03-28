@@ -23,7 +23,7 @@ export default class ChatInput extends Component {
     if (!this.state.message) {
       alert('Enter in a message');
     } else {
-      this.props.sendMessage(this.props.currentRoom.id, this.state.message, this.props.name);
+      this.props.sendMessage(this.props.currentRoom.id, this.state.message, this.props.user.name);
       this.setState({
         message: ''
       });
@@ -50,6 +50,6 @@ export default class ChatInput extends Component {
 
 ChatInput.propTypes = {
   currentRoom: React.PropTypes.object,
-  name: React.PropTypes.string,
+  user: React.PropTypes.object,
   sendMessage: React.PropTypes.func
 };
