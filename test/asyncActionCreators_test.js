@@ -15,7 +15,7 @@ axios.defaults.adapter = httpAdapter;
 const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
-describe('ASYNC ACTIONS', () => {
+describe('ASYNC ACTION CREATORS', () => {
   afterEach(() => {
     nock.cleanAll();
   });
