@@ -72,7 +72,7 @@ export const saveUser = (name) => {
   return {
     type: SAVE_USER,
     payload: name
-  }
+  };
 };
 
 export const logoutUser = () => {
@@ -81,7 +81,7 @@ export const logoutUser = () => {
   return {
     type: LOGOUT_USER,
     payload: ''
-  }
+  };
 }
 
 export const sendMessage = (roomId, message, name) => {

@@ -8,7 +8,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { username: '' }
+    this.state = { name: '' }
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -16,15 +16,17 @@ class Login extends Component {
 
   onInputChange(event) {
     this.setState({
-      username: event.target.value
+      name: event.target.value
     })
   }
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.saveUser(this.state.username);
+
+    this.props.saveUser(this.state.name);
+    
     this.setState({
-      username: ''
+      name: ''
     });
   }
 
@@ -36,7 +38,7 @@ class Login extends Component {
           <input 
             type="text" 
             placeholder="Type your username..."
-            value={this.state.username}
+            value={this.state.name}
             onChange={this.onInputChange} />
           <button type="submit">Join the DoorDash Chat!</button>
         </form>
