@@ -15,6 +15,7 @@ const LeftPanel = props => {
         rooms={props.rooms}
         selectCurrentRoom={props.selectCurrentRoom}
         currentRoom={props.currentRoom} />
+      
     </div>
   );
 }

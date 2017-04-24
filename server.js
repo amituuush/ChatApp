@@ -70,7 +70,7 @@ router.get('/rooms', function(req, res) {
     const rooms = database.map((room) => {
       return {name: room.name, id: room.id}
     })
-    console.log('Response:',rooms)
+    console.log('Response:', rooms)
     res.json(rooms);
 });
 

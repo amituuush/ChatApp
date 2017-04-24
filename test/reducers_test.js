@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import roomsReducer from '../src/reducers/rooms_reducer';
 import updateTimeReducer from '../src/reducers/update_time_reducer';
+import * as actions from '../src/actions';
 import { FETCH_ROOMS, UPDATE_TIMER } from '../src/actions/types';
 
 describe('REDUCERS', () => {
@@ -24,6 +25,12 @@ describe('REDUCERS', () => {
       const action = { type: UPDATE_TIMER };
       expect(updateTimeReducer(0, action)).to.deep.equal(1);
     });
+  });
+
+  describe('saveUserReducer', () => {
+    it('should receive a string as the payload');
+
+    it('should return the payload');
   });
 
 });
