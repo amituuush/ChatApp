@@ -56,6 +56,24 @@ describe('ASYNC ACTION CREATORS', () => {
     });
   });
 
+    describe('sendMessage', () => {
+    it('should return an array of messages as objects', () => {
+      nock(host)
+        .get('/api/rooms/0/messages')
+        .reply(200, [{ "name": "Jack", "message": "hey"}])
+
+      const expectedActions = [
+        { type: types.FETCH_MESSAGES, payload: [{ "name": "Jack", "message": "hey"},] }
+      ];
+
+      const store = mockStore({ messages: [] })
+      return store.dispatch(actions.fetchMessages(0))
+        .then(() => {
+          expect(store.getActions()).to.deep.equal(expectedActions)
+        })
+    });
+  });
+
   describe('updateTimer', () => {
     it('should return an action with type: UPDATE_TIMER', () => {
       const expectedAction = {

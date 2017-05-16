@@ -119,4 +119,4 @@ app.use('/api', router);
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-console.log(`API running at localhost:${port}/api`);
+console.log(`API running at localhost:${port}`);

@@ -40,7 +40,7 @@ class Login extends Component {
             placeholder="Type your username..."
             value={this.state.name}
             onChange={this.onInputChange} />
-          <button type="submit">Join the DoorDash Chat!</button>
+          <button type="submit">Join the chat app!</button>
         </form>
       </div>
       </div>
