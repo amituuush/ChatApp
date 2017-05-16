@@ -23,7 +23,9 @@ export default class ChatBox extends Component {
     return <Message
             message={message.message}
             messageName={message.name}
+            id={message.id}
             name={this.props.name}
+            changeReaction={this.props.changeReaction}
             key={i} />
     });
 

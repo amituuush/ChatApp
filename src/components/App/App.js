@@ -40,7 +40,8 @@ class App extends Component {
               messages={this.props.messages}
               name={this.props.name}
               sendMessage={this.props.sendMessage}
-              name={this.props.name} />
+              name={this.props.name}
+              changeReaction={this.props.changeReaction} />
           </div>
         }
         </div>

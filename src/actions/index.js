@@ -55,6 +55,7 @@ export const fetchMessages = (roomId) => {
   return dispatch => {
     return axios.get(`/api/rooms/${roomId}/messages`)
       .then(res => {
+        console.log(res);
         return dispatch({
           type: FETCH_MESSAGES,
           payload: res.data
@@ -108,6 +109,20 @@ export const sendMessage = (roomId, message, name) => {
       });
   }
 };
+
+export const changeReaction = (roomId, messageId, reaction) => {
+  console.log('change Reaction');
+  axios.patch(`/api/rooms/${roomId}/messages/${messageId}`)
+    .then(res => {
+      dispatch({
+        type: SMILE_REACTION,
+        payload: reaction
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
 
 export const updateTimer = () => {
   return {

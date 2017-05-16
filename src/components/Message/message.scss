@@ -4,6 +4,7 @@
   float: left;
 
   .message-bubble {
+    display: inline-block;
     background: #fff;
     padding: 0.5em 0.9em 0.5em 0.9em;
     border-radius: 20px;
@@ -14,7 +15,7 @@
   }
 
   .red {
-    background: #FF1940;
+    background: #117CD9;
     color: #fff;
   }
 

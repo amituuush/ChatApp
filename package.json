@@ -7,8 +7,9 @@
     "start": "node server.js",
     "api-server": "node server.js",
     "postinstall": "webpack -p",
-    "test": "mocha --recursive --compilers js:babel-core/register --require ignore-styles",
+    "test": "mocha --recursive --compilers setup.js js:babel-core/register --require ignore-styles",
     "tdd": "npm test -- --watch",
+    "test-1": "mocha --require setup.js --recursive ./test",
     "build": "webpack -p"
   },
   "engines": {
@@ -26,6 +27,7 @@
     "css-loader": "^0.27.0",
     "enzyme": "^2.7.1",
     "ignore-styles": "^5.0.1",
+    "jsdom": "^10.0.0",
     "json-loader": "^0.5.4",
     "mocha": "^3.2.0",
     "moxios": "^0.3.0",
@@ -38,7 +40,7 @@
     "redux-mock-store": "^1.2.2",
     "sass-loader": "^6.0.3",
     "serve": "^3.1.0",
-    "sinon": "^1.17.7",
+    "sinon": "^2.1.0",
     "standard": "^9.0.1",
     "style-loader": "^0.13.2"
   },
@@ -54,6 +56,7 @@
     "redux": "^3.6.0",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
+    "shortid": "^2.2.8",
     "webpack": "^1.13.3"
   }
 }

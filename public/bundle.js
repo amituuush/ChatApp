@@ -25581,6 +25581,7 @@
 	var ADD_USER_TO_ROOM = exports.ADD_USER_TO_ROOM = 'ADD_USER_TO_ROOM';
 	var UPDATE_TIMER = exports.UPDATE_TIMER = 'UPDATE_TIMER';
 	var LOGOUT_USER = exports.LOGOUT_USER = 'LOGOUT_USER';
+	var SMILE_REACTION = exports.SMILE_REACTION = 'SMILE_REACTION';
 
 /***/ },
 /* 234 */
@@ -25766,6 +25767,8 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _React$createElement;
+
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'app-container' },
@@ -25779,12 +25782,12 @@
 	            currentRoom: this.props.currentRoom,
 	            timeOnline: this.props.timeOnline,
 	            logoutUser: this.props.logoutUser }),
-	          _react2.default.createElement(_RightPanel2.default, _defineProperty({
+	          _react2.default.createElement(_RightPanel2.default, (_React$createElement = {
 	            currentRoom: this.props.currentRoom,
 	            messages: this.props.messages,
 	            name: this.props.name,
 	            sendMessage: this.props.sendMessage
-	          }, 'name', this.props.name))
+	          }, _defineProperty(_React$createElement, 'name', this.props.name), _defineProperty(_React$createElement, 'changeReaction', this.props.changeReaction), _React$createElement))
 	        )
 	      );
 	    }
@@ -25827,7 +25830,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.updateTimer = exports.sendMessage = exports.logoutUser = exports.saveUser = exports.fetchMessages = exports.selectCurrentRoom = exports.fetchRooms = undefined;
+	exports.updateTimer = exports.changeReaction = exports.sendMessage = exports.logoutUser = exports.saveUser = exports.fetchMessages = exports.selectCurrentRoom = exports.fetchRooms = undefined;
 
 	var _axios = __webpack_require__(240);
 
@@ -25874,6 +25877,7 @@
 	var fetchMessages = exports.fetchMessages = function fetchMessages(roomId) {
 	  return function (dispatch) {
 	    return _axios2.default.get('/api/rooms/' + roomId + '/messages').then(function (res) {
+	      console.log(res);
 	      return dispatch({
 	        type: _types.FETCH_MESSAGES,
 	        payload: res.data
@@ -25923,6 +25927,18 @@
 	      console.log(err);
 	    });
 	  };
+	};
+
+	var changeReaction = exports.changeReaction = function changeReaction(roomId, messageId, reaction) {
+	  console.log('change Reaction');
+	  _axios2.default.patch('/api/rooms/' + roomId + '/messages/' + messageId).then(function (res) {
+	    dispatch({
+	      type: SMILE_REACTION,
+	      payload: reaction
+	    });
+	  }).catch(function (err) {
+	    console.log(err);
+	  });
 	};
 
 	var updateTimer = exports.updateTimer = function updateTimer() {
@@ -27507,7 +27523,7 @@
 	            _react2.default.createElement(
 	              'button',
 	              { type: 'submit' },
-	              'Join the DoorDash Chat!'
+	              'Join the chat app!'
 	            )
 	          )
 	        )
@@ -27559,7 +27575,7 @@
 
 
 	// module
-	exports.push([module.id, ".login-wrap {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  text-align: center; }\n  .login-wrap .login-container {\n    text-align: center;\n    width: 20em;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    margin: -7em 0 0 -10em; }\n    .login-wrap .login-container input {\n      display: block;\n      width: 100%;\n      border-radius: 3px;\n      border: none;\n      box-shadow: inset 0px 0px 2px #95979b;\n      padding: 0.7em;\n      margin-bottom: 1em;\n      font-weight: 100;\n      border: 1px solid #fff; }\n      .login-wrap .login-container input:focus {\n        outline: none;\n        border: 1px solid #b6d2f3; }\n    .login-wrap .login-container button {\n      display: block;\n      width: 21.4em;\n      background: #FF1940;\n      border: none;\n      border-radius: 3px;\n      color: #fff;\n      padding: 0.7em; }\n      .login-wrap .login-container button:hover {\n        cursor: pointer; }\n      .login-wrap .login-container button:focus {\n        outline: none; }\n", ""]);
+	exports.push([module.id, ".login-wrap {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  text-align: center; }\n  .login-wrap .login-container {\n    text-align: center;\n    width: 20em;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    margin: -7em 0 0 -10em; }\n    .login-wrap .login-container input {\n      display: block;\n      width: 100%;\n      border-radius: 3px;\n      border: none;\n      box-shadow: inset 0px 0px 2px #95979b;\n      padding: 0.7em;\n      margin-bottom: 1em;\n      font-weight: 100;\n      border: 1px solid #fff; }\n      .login-wrap .login-container input:focus {\n        outline: none;\n        border: 1px solid #b6d2f3; }\n    .login-wrap .login-container button {\n      display: block;\n      width: 21.4em;\n      background: #117CD9;\n      border: none;\n      border-radius: 3px;\n      color: #fff;\n      padding: 0.7em; }\n      .login-wrap .login-container button:hover {\n        cursor: pointer; }\n      .login-wrap .login-container button:focus {\n        outline: none; }\n", ""]);
 
 	// exports
 
@@ -30579,7 +30595,7 @@
 
 
 	// module
-	exports.push([module.id, ".chat-room-container {\n  color: #fff;\n  padding: 1em 0em 1em 2em; }\n  .chat-room-container:hover {\n    cursor: pointer;\n    background: #e51639; }\n\n.active {\n  background: #7F0D1F; }\n", ""]);
+	exports.push([module.id, ".chat-room-container {\n  color: #fff;\n  padding: 1em 0em 1em 2em; }\n  .chat-room-container:hover {\n    cursor: pointer;\n    background: #0f6fc3; }\n\n.active {\n  background: #0a4a82; }\n", ""]);
 
 	// exports
 
@@ -30659,7 +30675,7 @@
 
 
 	// module
-	exports.push([module.id, ".left-panel-container {\n  float: left;\n  width: 275px;\n  background: #FF1940;\n  height: 100%; }\n", ""]);
+	exports.push([module.id, ".left-panel-container {\n  float: left;\n  width: 275px;\n  background: #117CD9;\n  height: 100%; }\n", ""]);
 
 	// exports
 
@@ -30704,7 +30720,8 @@
 	    _react2.default.createElement(_ChatBox2.default, {
 	      messages: props.messages,
 	      currentRoom: props.currentRoom,
-	      name: props.name }),
+	      name: props.name,
+	      changeReaction: props.changeReaction }),
 	    _react2.default.createElement(_ChatInput2.default, {
 	      currentRoom: props.currentRoom,
 	      name: props.name,
@@ -30845,7 +30862,7 @@
 
 
 	// module
-	exports.push([module.id, ".chat-header-container {\n  width: calc(100% - 175px);\n  padding: 1.7em 0em;\n  box-shadow: 0px 1px 6px #C7C9CA;\n  background: #fff;\n  position: fixed;\n  top: 0;\n  z-index: 9999;\n  text-align: center; }\n  .chat-header-container .current-room {\n    color: #696969;\n    font-size: 1.4em;\n    padding-bottom: 0.4em; }\n  .chat-header-container .user {\n    color: #696969;\n    font-size: 0.9em; }\n  .chat-header-container .active-user {\n    color: #FF1940; }\n", ""]);
+	exports.push([module.id, ".chat-header-container {\n  width: calc(100% - 175px);\n  padding: 1.7em 0em;\n  box-shadow: 0px 1px 6px #C7C9CA;\n  background: #fff;\n  position: fixed;\n  top: 0;\n  z-index: 9999;\n  text-align: center; }\n  .chat-header-container .current-room {\n    color: #696969;\n    font-size: 1.4em;\n    padding-bottom: 0.4em; }\n  .chat-header-container .user {\n    color: #696969;\n    font-size: 0.9em; }\n  .chat-header-container .active-user {\n    color: #117CD9; }\n", ""]);
 
 	// exports
 
@@ -30916,7 +30933,9 @@
 	        return _react2.default.createElement(_Message2.default, {
 	          message: message.message,
 	          messageName: message.name,
+	          id: message.id,
 	          name: _this2.props.name,
+	          changeReaction: _this2.props.changeReaction,
 	          key: i });
 	      });
 
@@ -30949,6 +30968,8 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -30957,27 +30978,62 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Message = function Message(props) {
-	  var isCurrentUser = false;
-	  if (props.name === props.messageName) {
-	    isCurrentUser = true;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Message = function (_Component) {
+	  _inherits(Message, _Component);
+
+	  function Message(props) {
+	    _classCallCheck(this, Message);
+
+	    var _this = _possibleConstructorReturn(this, (Message.__proto__ || Object.getPrototypeOf(Message)).call(this, props));
+
+	    _this.state = {};
+
+	    _this.handleReactionChange = _this.handleReactionChange.bind(_this);
+	    return _this;
 	  }
 
-	  return _react2.default.createElement(
-	    'div',
-	    { className: isCurrentUser ? "message-container right" : "message-container" },
-	    _react2.default.createElement(
-	      'div',
-	      { className: isCurrentUser ? "message-bubble red" : "message-bubble" },
-	      props.message
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: isCurrentUser ? "message-name hide" : "message-name" },
-	      props.messageName
-	    )
-	  );
-	};
+	  _createClass(Message, [{
+	    key: 'handleReactionChange',
+	    value: function handleReactionChange() {
+	      this.props.changeReaction(this.props.currentRoom.id, this.props.id);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var isCurrentUser = false;
+	      if (this.props.name === this.props.messageName) {
+	        isCurrentUser = true;
+	      }
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: isCurrentUser ? "message-container right" : "message-container" },
+	        _react2.default.createElement(
+	          'div',
+	          { className: isCurrentUser ? "message-bubble red" : "message-bubble" },
+	          this.props.message
+	        ),
+	        _react2.default.createElement('img', { onClick: this.handleReactionChange }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: isCurrentUser ? "message-name hide" : "message-name" },
+	          this.props.messageName
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Message;
+	}(_react.Component);
+
+	exports.default = Message;
+
 
 	Message.propTypes = {
 	  message: _react2.default.PropTypes.string,
@@ -30985,8 +31041,6 @@
 	  name: _react2.default.PropTypes.string,
 	  currentRoom: _react2.default.PropTypes.object
 	};
-
-	exports.default = Message;
 
 /***/ },
 /* 295 */
@@ -31023,7 +31077,7 @@
 
 
 	// module
-	exports.push([module.id, ".message-container {\n  max-width: 50%;\n  clear: both;\n  float: left; }\n  .message-container .message-bubble {\n    background: #fff;\n    padding: 0.5em 0.9em 0.5em 0.9em;\n    border-radius: 20px;\n    font-size: 0.8em;\n    margin-bottom: 0.4em;\n    margin-top: 1.1em;\n    line-height: 1.5em; }\n  .message-container .red {\n    background: #FF1940;\n    color: #fff; }\n  .message-container .message-name {\n    font-size: 0.8em;\n    color: #666666; }\n  .message-container .hide {\n    display: none; }\n\n.right {\n  float: right; }\n", ""]);
+	exports.push([module.id, ".message-container {\n  max-width: 50%;\n  clear: both;\n  float: left; }\n  .message-container .message-bubble {\n    display: inline-block;\n    background: #fff;\n    padding: 0.5em 0.9em 0.5em 0.9em;\n    border-radius: 20px;\n    font-size: 0.8em;\n    margin-bottom: 0.4em;\n    margin-top: 1.1em;\n    line-height: 1.5em; }\n  .message-container .red {\n    background: #117CD9;\n    color: #fff; }\n  .message-container .message-name {\n    font-size: 0.8em;\n    color: #666666; }\n  .message-container .hide {\n    display: none; }\n\n.right {\n  float: right; }\n", ""]);
 
 	// exports
 
