@@ -66,18 +66,15 @@ const logUser = (room, username) => {
 
 // API Routes
 router.get('/rooms', function(req, res) {
-    console.log('hey');
     const rooms = database.map((room) => {
       return {name: room.name, id: room.id}
     })
-    console.log('Response:', rooms)
     res.json(rooms);
 });
 
 router.get('/rooms/:roomId', function(req, res) {
   room = findRoom(req.params.roomId)
   if (room.error) {
-    console.log('Response:',room)
     res.json(room)
   } else {
     console.log('Response:',{name: room.name, id: room.id, users: room.users})

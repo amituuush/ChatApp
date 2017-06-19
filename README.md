@@ -1,4 +1,4 @@
-# DoorDash Chat Application
+# Instant Message Web Application
 * Frontend built using React as a View layer, Redux for state management, and SASS as a css-preprocessor
 * Mocha and Enzyme for unit testing
 * Axios as a http library
