@@ -25,8 +25,11 @@ export const fetchRooms = () => {
   }
 };
 
+const page = 1;
+
 export const selectCurrentRoom = (roomId) => {
   return dispatch => {
+    page = 1;
     axios.get(`/api/rooms/${roomId}`)
       .then(res => {
         dispatch({
@@ -35,8 +38,9 @@ export const selectCurrentRoom = (roomId) => {
         })
       })
       .catch(err => { console.log(err); });
-     axios.get(`/api/rooms/${roomId}/messages`)
+     axios.get(`/api/rooms/${roomId}/messages?page=${page}`)
       .then(res => {
+        page++;
         dispatch({
           type: FETCH_MESSAGES,
           payload: res.data
@@ -46,16 +50,44 @@ export const selectCurrentRoom = (roomId) => {
   }
 };
 
-export const fetchMessages = (roomId) => {
+export const fetchMessagesPagination = (roomId) => {
   return dispatch => {
-    return axios.get(`/api/rooms/${roomId}/messages`)
+    return axios.get(`/api/rooms/${roomId}/messages?page=${page}`)
       .then(res => {
+        page++;
         return dispatch({
-          type: FETCH_MESSAGES,
+          type: FETCH_MESSAGES_PAGINATION,
           payload: res.data
         });
       })
       .catch(err => { console.log(err); });
+  }
+};
+
+// create recursive function in case there are more than 10 new messages in between pollings
+export const fetchMessagesPoll = (roomId) => {
+  return dispatch => {
+    function recurse(page) {
+      // base case
+       if () {
+
+       }
+      return axios.get(`/api/rooms/${roomId}/messages?page=${page}`)
+      .then(res => {
+        return dispatch({
+          type: FETCH_MESSAGES_POLL,
+          payload: res.data
+        });
+      .then(() => {
+        recurse(page + 1);
+      })
+
+      })
+      .catch(err => { console.log(err); });
+    }
+
+    recurse(1);
+
   }
 };
 
