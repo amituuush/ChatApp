@@ -26126,6 +26126,8 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	exports.default = function () {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var action = arguments[1];
@@ -26134,17 +26136,17 @@
 	    case _types.SELECT_CURRENT_ROOM:
 	      return action.payload;
 	    case _types.ADD_USER_TO_ROOM:
-	      var newState = Object.assign({}, state);
 	      var newUser = true;
-	      for (var i = 0; i < newState.users.length; i++) {
-	        if (newState.users[i] === action.payload) {
-	          newUser = false;
-	        }
+	      var users = [];
+
+	      for (var i = 0; i < state.users.length; i++) {
+	        var user = state.users[i];
+	        user === action.name ? newUser = false : '';
+	        users.push(user);
 	      }
-	      if (newUser) {
-	        newState.users.push(action.payload);
-	      }
-	      return newState;
+	      newUser ? users.push(action.name) : '';
+
+	      return _extends({}, state, { users: users });
 	  }
 	  return state;
 	};
@@ -26179,12 +26181,15 @@
 	          return message;
 	        }
 	      });
-	      return updatedState;
+	    case FETCH_MESSAGES_PAGINATION:
+	      return [action.payload].concat(_toConsumableArray(state));
 	  }
 	  return state;
 	};
 
 	var _types = __webpack_require__(241);
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /***/ }),
 /* 244 */
@@ -26296,15 +26301,18 @@
 	    value: function componentDidMount() {
 	      var _this2 = this;
 
-	      var nameExists = localStorage.getItem('name');
-	      if (nameExists) {
-	        this.props.saveUser(nameExists);
+	      var name = localStorage.getItem('name');
+	      if (name) {
+	        this.props.saveUser(name);
 	      }
+
 	      this.props.fetchRooms();
 	      this.props.selectCurrentRoom(0);
+
 	      setInterval(function () {
 	        _this2.props.fetchMessages(_this2.props.currentRoom.id);
 	      }, 3000);
+
 	      setInterval(this.props.updateTimer, 60000);
 	    }
 	  }, {
@@ -26449,10 +26457,7 @@
 	};
 
 	var sendMessage = exports.sendMessage = function sendMessage(roomId, message, name) {
-	  var messagePackage = {
-	    name: name,
-	    message: message
-	  };
+	  var messagePackage = { name: name, message: message };
 
 	  return function (dispatch) {
 	    _axios2.default.post('/api/rooms/' + roomId + '/messages', messagePackage).then(function (res) {
@@ -26463,7 +26468,7 @@
 
 	      dispatch({
 	        type: _types.ADD_USER_TO_ROOM,
-	        payload: name
+	        name: name
 	      });
 	    }).catch(function (err) {
 	      console.log(err);
@@ -28031,9 +28036,7 @@
 	  _createClass(Login, [{
 	    key: 'onInputChange',
 	    value: function onInputChange(event) {
-	      this.setState({
-	        name: event.target.value
-	      });
+	      this.setState({ name: event.target.value });
 	    }
 	  }, {
 	    key: 'onFormSubmit',
@@ -28041,10 +28044,7 @@
 	      event.preventDefault();
 
 	      this.props.saveUser(this.state.name);
-
-	      this.setState({
-	        name: ''
-	      });
+	      this.setState({ name: '' });
 	    }
 	  }, {
 	    key: 'render',
@@ -31187,7 +31187,6 @@
 	      }
 
 	      var reactionFile = void 0;
-	      console.log(this.props.reaction);
 	      switch (this.props.reaction) {
 	        case 'smiley':
 	          reactionFile = './img/smiley.svg';
@@ -31195,7 +31194,6 @@
 	        default:
 	          reactionFile = './img/addReaction.svg';
 	      }
-	      console.log('reactionfile', reactionFile);
 
 	      return _react2.default.createElement(
 	        'div',

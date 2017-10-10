@@ -23,7 +23,6 @@ export default class Message extends Component {
     }
 
     let reactionFile;
-    console.log(this.props.reaction);
     switch(this.props.reaction) {
       case 'smiley':
         reactionFile = './img/smiley.svg';
@@ -31,7 +30,6 @@ export default class Message extends Component {
       default:
         reactionFile = './img/addReaction.svg';
     }
-    console.log('reactionfile', reactionFile);
 
     return (
       <div className={isCurrentUser ? "message-container right" : "message-container"}>

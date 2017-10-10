@@ -5,17 +5,17 @@ export default function (state = {}, action) {
     case SELECT_CURRENT_ROOM:
       return action.payload;
     case ADD_USER_TO_ROOM:
-      let newState = Object.assign({}, state);
       let newUser = true;
-      for (var i = 0; i < newState.users.length; i++) {
-        if (newState.users[i] === action.payload) {
-          newUser = false;
-        }
+      let users = [];
+
+      for (var i = 0; i < state.users.length; i++) {
+        let user = state.users[i];
+        (user === action.name) ? newUser = false : '';
+        users.push(user);
       }
-      if (newUser) {
-        newState.users.push(action.payload);
-      }
-      return newState;
+      newUser ? users.push(action.name) : '';
+
+      return { ...state, users };
   }
   return state;
 }

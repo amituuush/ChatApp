@@ -21,9 +21,7 @@ export const fetchRooms = () => {
           payload: res.data
         });
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => { console.log(err); });
   }
 };
 
@@ -36,9 +34,7 @@ export const selectCurrentRoom = (roomId) => {
           payload: res.data
         })
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => { console.log(err); });
      axios.get(`/api/rooms/${roomId}/messages`)
       .then(res => {
         dispatch({
@@ -46,9 +42,7 @@ export const selectCurrentRoom = (roomId) => {
           payload: res.data
         })
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => { console.log(err); });
   }
 };
 
@@ -61,9 +55,7 @@ export const fetchMessages = (roomId) => {
           payload: res.data
         });
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => { console.log(err); });
   }
 };
 
@@ -86,10 +78,7 @@ export const logoutUser = () => {
 };
 
 export const sendMessage = (roomId, message, name) => {
-  let messagePackage = {
-    name: name,
-    message: message
-  };
+  let messagePackage = { name, message };
 
   return dispatch => {
     axios.post(`/api/rooms/${roomId}/messages`, messagePackage)
@@ -101,25 +90,23 @@ export const sendMessage = (roomId, message, name) => {
 
         dispatch({
           type: ADD_USER_TO_ROOM,
-          payload: name
+          name
         });
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => { console.log(err); });
   }
 };
 
 export const addReaction = (roomId, messageId, reactionType) => {
   return dispatch => {
-  axios.post(`/api/rooms/${roomId}/messages/${messageId}`, { reaction: 'smiley'})
-    .then(res => {
-      dispatch({
-        type: SMILE_REACTION,
-        messageId
-      });
-    })
-    .catch(err => { console.log(err); })
+    axios.post(`/api/rooms/${roomId}/messages/${messageId}`, { reaction: 'smiley'})
+      .then(res => {
+        dispatch({
+          type: SMILE_REACTION,
+          messageId
+        });
+      })
+      .catch(err => { console.log(err); })
   }
 };
 

@@ -21,14 +21,14 @@ export default class ChatBox extends Component {
   render () {
     let messages = this.props.messages.map((message, i) => {
     return <Message
-            message={message.message}
-            messageName={message.name}
-            id={message.id}
-            reaction={message.reaction}
-            name={this.props.name}
-            currentRoomId={this.props.currentRoom.id}
-            addReaction={this.props.addReaction}
-            key={i} />
+              message={message.message}
+              messageName={message.name}
+              id={message.id}
+              reaction={message.reaction}
+              name={this.props.name}
+              currentRoomId={this.props.currentRoom.id}
+              addReaction={this.props.addReaction}
+              key={i} />
     });
 
     return (

@@ -10,15 +10,16 @@ import './app.scss';
 class App extends Component {
 
   componentDidMount() {
-    let nameExists = localStorage.getItem('name');
-    if (nameExists) {
-      this.props.saveUser(nameExists);
-    }
+    let name = localStorage.getItem('name');
+    if (name) { this.props.saveUser(name); }
+
     this.props.fetchRooms();
     this.props.selectCurrentRoom(0);
+
     setInterval(() => {
       this.props.fetchMessages(this.props.currentRoom.id);
     }, 3000);
+
     setInterval(this.props.updateTimer, 60000);
   }
 
