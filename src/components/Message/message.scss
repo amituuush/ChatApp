@@ -15,7 +15,7 @@
   }
 
   .red {
-    background: #117CD9;
+    background: #FF0F39;
     color: #fff;
   }
 
@@ -26,6 +26,14 @@
 
   .hide {
     display: none;
+  }
+
+  .add-reaction {
+    width: 1.5em;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 

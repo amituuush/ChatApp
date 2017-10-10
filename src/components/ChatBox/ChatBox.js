@@ -10,7 +10,7 @@ export default class ChatBox extends Component {
     var node = ReactDOM.findDOMNode(this);
     this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
   }
- 
+
   componentDidUpdate() {
     if (this.shouldScrollBottom) {
       var node = ReactDOM.findDOMNode(this);
@@ -24,8 +24,10 @@ export default class ChatBox extends Component {
             message={message.message}
             messageName={message.name}
             id={message.id}
+            reaction={message.reaction}
             name={this.props.name}
-            changeReaction={this.props.changeReaction}
+            currentRoomId={this.props.currentRoom.id}
+            addReaction={this.props.addReaction}
             key={i} />
     });
 

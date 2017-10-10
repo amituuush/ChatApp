@@ -4,7 +4,7 @@
   "description": "The Frontend take home project for DoorDash",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "api-server": "node server.js",
     "postinstall": "webpack -p",
     "test": "mocha --recursive --compilers setup.js js:babel-core/register --require ignore-styles",

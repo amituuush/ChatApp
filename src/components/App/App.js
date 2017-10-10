@@ -25,23 +25,24 @@ class App extends Component {
   render() {
     return (
         <div className="app-container">
-        {!this.props.name ? 
+        {
+          !this.props.name ?
           <Login /> :
           <div className="app-container">
-            <LeftPanel 
+            <LeftPanel
               rooms={this.props.rooms}
               selectCurrentRoom={this.props.selectCurrentRoom}
               name={this.props.name}
               currentRoom={this.props.currentRoom}
               timeOnline={this.props.timeOnline}
               logoutUser={this.props.logoutUser} />
-            <RightPanel 
+            <RightPanel
               currentRoom={this.props.currentRoom}
               messages={this.props.messages}
               name={this.props.name}
               sendMessage={this.props.sendMessage}
               name={this.props.name}
-              changeReaction={this.props.changeReaction} />
+              addReaction={this.props.addReaction} />
           </div>
         }
         </div>

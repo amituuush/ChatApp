@@ -8,15 +8,15 @@ import './right-panel.scss';
 const RightPanel = props => {
   return (
     <div className="right-panel-container">
-      <ChatHeader 
+      <ChatHeader
         currentRoom={props.currentRoom}
         name={props.name} />
-      <ChatBox 
+      <ChatBox
         messages={props.messages}
         currentRoom={props.currentRoom}
         name={props.name}
-        changeReaction={props.changeReaction} />
-      <ChatInput 
+        addReaction={props.addReaction} />
+      <ChatInput
         currentRoom={props.currentRoom}
         name={props.name}
         sendMessage={props.sendMessage} />

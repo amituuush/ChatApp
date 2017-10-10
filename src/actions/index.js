@@ -1,13 +1,14 @@
 import axios from 'axios';
-import { 
-  FETCH_ROOMS, 
-  SELECT_CURRENT_ROOM, 
-  FETCH_MESSAGES, 
-  SAVE_USER, 
+import {
+  FETCH_ROOMS,
+  SELECT_CURRENT_ROOM,
+  FETCH_MESSAGES,
+  SAVE_USER,
   SEND_MESSAGE ,
   ADD_USER_TO_ROOM,
   UPDATE_TIMER,
-  LOGOUT_USER
+  LOGOUT_USER,
+  SMILE_REACTION
 } from './types';
 
 
@@ -49,13 +50,12 @@ export const selectCurrentRoom = (roomId) => {
         console.log(err);
       });
   }
-}
+};
 
 export const fetchMessages = (roomId) => {
   return dispatch => {
     return axios.get(`/api/rooms/${roomId}/messages`)
       .then(res => {
-        console.log(res);
         return dispatch({
           type: FETCH_MESSAGES,
           payload: res.data
@@ -83,14 +83,14 @@ export const logoutUser = () => {
     type: LOGOUT_USER,
     payload: ''
   };
-}
+};
 
 export const sendMessage = (roomId, message, name) => {
   let messagePackage = {
     name: name,
     message: message
   };
-  
+
   return dispatch => {
     axios.post(`/api/rooms/${roomId}/messages`, messagePackage)
       .then(res => {
@@ -110,22 +110,21 @@ export const sendMessage = (roomId, message, name) => {
   }
 };
 
-export const changeReaction = (roomId, messageId, reaction) => {
-  console.log('change Reaction');
-  axios.patch(`/api/rooms/${roomId}/messages/${messageId}`)
+export const addReaction = (roomId, messageId, reactionType) => {
+  return dispatch => {
+  axios.post(`/api/rooms/${roomId}/messages/${messageId}`, { reaction: 'smiley'})
     .then(res => {
       dispatch({
         type: SMILE_REACTION,
-        payload: reaction
+        messageId
       });
     })
-    .catch(err => {
-      console.log(err);
-    })
-}
+    .catch(err => { console.log(err); })
+  }
+};
 
 export const updateTimer = () => {
   return {
     type: UPDATE_TIMER
   };
-}
+};
